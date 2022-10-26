@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API from '../api/API.js';
 
 function Home() {
   // Initialisation
@@ -12,13 +13,13 @@ function Home() {
   //Context
   //Methods
   const apiCall = async (endpoint) => {
-  const URL = 'http://localhost:5000/api';
-  const endpointAddress = URL + endpoint;
-  const response = await fetch(endpointAddress);
-  const result = await response.json();
-  setMedicines(result);
+    const response = await API.get(endpoint);
+    response.isSuccess
+      ? setMedicines(response.result)
+      : setLoadingMessage(response.message)
+
   }
-useEffect(() => {apiCall(endpoint) }, [endpoint]);
+  useEffect(() => { apiCall(endpoint) }, [endpoint]);
 
 
 
@@ -32,8 +33,9 @@ useEffect(() => {apiCall(endpoint) }, [endpoint]);
           : medicines.length === 0
             ? <p>No medicines found</p>
             : medicines.map((medicine) =>
-              <p key={medicine.MedicineID}>{medicine.MedicineID} {medicine.MedicineName}</p>
-            )
+                  <p key={medicine.MedicineID}>{medicine.MedicineID} {medicine.MedicineName}</p>
+                )
+
       }
     </section>
 
