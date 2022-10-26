@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './Card.css';
+import '../UI/Card.css';
 
 
 Card.propTypes = {
@@ -16,6 +16,7 @@ export default function Card({ children, onClick, isParentHovering=false }) {
   return (
     <div className={"Card" + (isParentHovering ? " Hovering" : "")} onClick={onClick}>
       {children}
+
     </div>
   );
 }

@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import API from '../api/API.js';
+import Card from '../UI/Card.js';
+import MedicineCard from '../entities/medicines/MedicineCard.js';
+
 
 function Home() {
   // Initialisation
@@ -32,10 +35,18 @@ function Home() {
           ? <p>{loadingMessage}</p>
           : medicines.length === 0
             ? <p>No medicines found</p>
-            : medicines.map((medicine) =>
-                  <p key={medicine.MedicineID}>{medicine.MedicineID} {medicine.MedicineName}</p>
-                )
+            :
+              <Card.Container>
 
+              {
+                medicines.map((medicine) =>
+                  
+                    <MedicineCard key={medicine.MedicineID} medicine={ medicine } />
+                     
+                )
+              }
+               </Card.Container>
+            
       }
     </section>
 
