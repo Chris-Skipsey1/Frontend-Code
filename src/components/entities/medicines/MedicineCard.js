@@ -14,10 +14,10 @@ export default function MedicineCard({ medicine, onClick, isParentHovering = fal
     // Methods -------------------------------------
     // View ----------------------------------------
     return (
-        <Card className={"Card" + (isParentHovering ? " Hovering" : "")} onClick={onClick}>
+        <Card  className={"Card" + (isParentHovering ? " Hovering" : "")} onClick={onClick}>
             
             <div className="MedicineCard">
-                {`${medicine.MedicineID} ${medicine.MedicineName}`}    
+                {`For today, you need to take the following  Medicine Name: ${ medicine.MedicineName} Amount: ${medicine.PrescriptionDosage}`}    
             </div>
         </Card>
     );

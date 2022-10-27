@@ -29,28 +29,22 @@ function Home() {
   //View
   return (
     <section>
-      <h2>Home page</h2>
+      <h2>My Medicines</h2>
       {
         !medicines
           ? <p>{loadingMessage}</p>
           : medicines.length === 0
             ? <p>No medicines found</p>
-            :
-              <Card.Container>
-
+            : <Card.Container>
               {
                 medicines.map((medicine) =>
-                  
-                    <MedicineCard key={medicine.MedicineID} medicine={ medicine } />
-                     
+                  <MedicineCard key={medicine.MedicineID} medicine={medicine} />
                 )
               }
-               </Card.Container>
-            
+            </Card.Container>
       }
+      
     </section>
-
   );
 }
-
 export default Home;

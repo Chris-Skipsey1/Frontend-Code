@@ -2,10 +2,7 @@ import PropTypes from 'prop-types';
 import '../UI/Card.css';
 
 
-Card.propTypes = {
-  onClick: PropTypes.func,
-  isParentHovering: PropTypes.bool
-};
+
 
 export default function Card({ children, onClick, isParentHovering=false }) {
   // Properties ----------------------------------

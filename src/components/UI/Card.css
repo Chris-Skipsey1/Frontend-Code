@@ -10,7 +10,7 @@ div.CardContainer {
     /* Layout */
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 100px;
     justify-content: center;
   }
   
