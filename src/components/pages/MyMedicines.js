@@ -4,7 +4,7 @@ import Card from '../UI/Card.js';
 import MedicineCard from '../entities/medicines/MedicineCard.js';
 
 
-function Home() {
+function MyMedicines() {
   // Initialisation
   const loggedInUserID = 5;
   const endpoint = `/medicines/clients/${loggedInUserID}`;
@@ -47,4 +47,4 @@ function Home() {
     </section>
   );
 }
-export default Home;
+export default MyMedicines;

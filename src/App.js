@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './components/pages/Home';
+import MyMedicines from './components/pages/MyMedicines';
 import SignIn from './components/pages/SignIn';
 import ContactUs from './components/pages/ContactUs';
 import PageNotFound from './components/pages/404';
@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route exact path='/' element={<Home />} />
+          <Route exact path='/' element={<MyMedicines />} />
           <Route path='signin' element={<SignIn />} />
           <Route path='/contact' element={<ContactUs />} />
           <Route path='*' element={<PageNotFound />} />

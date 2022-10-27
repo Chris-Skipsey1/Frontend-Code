@@ -1,6 +1,6 @@
 header {
     color: white;
-    background: #3c1557;
+    background: #25136b;
     display: flex;
 }
 
@@ -21,7 +21,7 @@ header a h1 {
 
 header a:hover,
 header a:active {
-    color: #aa63da;
+    color: #3d65c2;
 }
 
 header div.login {
