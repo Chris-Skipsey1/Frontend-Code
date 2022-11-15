@@ -1,9 +1,13 @@
+import AppointmentForm from '../entities/medicines/AppointmentForm.js';
+
 function SignIn() {
-    return (
-        <h2>Sign In</h2>
-        
-      
-    );
-  }
- 
+  return (
+    <div>
+    
+      <AppointmentForm></AppointmentForm>
+    </div>
+
+  );
+}
+
 export default SignIn;
