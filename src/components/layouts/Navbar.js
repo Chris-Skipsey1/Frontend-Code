@@ -11,7 +11,7 @@ function Navbar() {
                 <NavLink to='/' className={getLinkStyle}>My Medicines</NavLink>
             </div>
             <div className="navItem">
-                <NavLink to='/signin' className={getLinkStyle}>Sign In</NavLink>
+                <NavLink to='/bookappointment' className={getLinkStyle}>Book an Appointment</NavLink>
             </div>
             <div className="navItem">
                 <NavLink to='/contact' className={getLinkStyle}>Contact Us</NavLink>

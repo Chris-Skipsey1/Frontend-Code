@@ -1,6 +1,6 @@
 import AppointmentForm from '../entities/medicines/AppointmentForm.js';
 
-function SignIn() {
+function BookAppointment() {
   return (
     <div>
     
@@ -10,4 +10,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default BookAppointment;

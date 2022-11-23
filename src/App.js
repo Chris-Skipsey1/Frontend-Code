@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MyMedicines from './components/pages/MyMedicines';
-import SignIn from './components/pages/SignIn';
+import BookAppointment from './components/pages/BookAppointment';
 import ContactUs from './components/pages/ContactUs';
 import PageNotFound from './components/pages/404';
 import Layout from './components/layouts/Layout';
@@ -14,7 +14,7 @@ function App() {
       <Layout>
         <Routes>
           <Route exact path='/' element={<MyMedicines />} />
-          <Route path='signin' element={<SignIn />} />
+          <Route path='bookappointment' element={<BookAppointment />} />
           <Route path='/contact' element={<ContactUs />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>

@@ -7,7 +7,8 @@ const emptyAppointment = {
     PersonalTrainerName: 1,
     AppointmentDescription: "",
     AppointmentAvailabilityID: 10,
-    AppointmentClientID: 10
+    AppointmentClientID: 10,
+    AvailabilityPersonalTrainerID: 2
 }
 
 
@@ -30,10 +31,24 @@ export default function AppointmentForm({ initialAppointment = emptyAppointment 
     }
     useEffect(() => { getPersonalTrainers() }, []);
 
+
+    const [trainerAvailability, setTrainerAvailability] = useState(null);
+    const [loadingAvailabilityMessage, setLoadingAvailabilityMessage] = useState('Loading availability ...');
+
+    // GET Personal Trainers
+    const getTrainerAvailability = async () => {
+        const response = await API.get('/availability/personaltrainers');
+        response.isSuccess
+            ? setTrainerAvailability(response.result)
+            : setLoadingAvailabilityMessage(response.message)
+
+    }
+    useEffect(() => { getTrainerAvailability() }, []);
+
     // Handlers ---
     const handleChange = (event) => {
         const { name, value } = event.target;
-        const newValue = (name === 'PersonalTrainerName') ? parseInt(value) : value;
+        const newValue = (name === 'PersonalTrainerID') ? parseInt(value) : value;
         setAppointment({ ...appointment, [name]: newValue });
     };
     // View ---
@@ -59,7 +74,7 @@ export default function AppointmentForm({ initialAppointment = emptyAppointment 
                                 <option value="0" disabled>Select personal trainer</option>
 
                                 {
-                                    personalTrainers.map((trainer) => <option key={trainer.PersonalTrainerID} value={trainer.PersonalTrainerName}></option>)
+                                    personalTrainers.map((trainer) => <option key={trainer.PersonalTrainerName} value={trainer.PersonalTrainerID}>{trainer.PersonalTrainerName}</option>)
                                 }
 
                             </select>
@@ -69,23 +84,35 @@ export default function AppointmentForm({ initialAppointment = emptyAppointment 
 
             <FormItem
                 label="Personal Trainer Availability" // Top label
-                htmlFor="PersonalTrainerAvailability"
-                advice="Choose a personal trainer availability"
+                htmlFor="AvailabilityPersonalTrainerID"
+                advice="Choose the personal trainer's availability" // Top advice
                 error={null}
             >
-                <select
-                    name="PersonalTrainerAvailability"
-                    value={appointment.PersonalTrainerAvailability}
-                >
-                    <option value="0" disabled>Select personal availability</option>
+                {
+                    !trainerAvailability
+                        ? <p>{loadingAvailabilityMessage}</p>
+                        : trainerAvailability.length === 0
+                            ? <p>No availability found</p>
+                            : <select
+                                name="AvailabilityPersonalTrainerID"
+                                value={appointment.AvailabilityPersonalTrainerID}
+                                onChange={handleChange}
+                            >
 
-                    {
-                        [1, 2, 3, 4, 5].map((trainerName) => <option key={trainerName}>{trainerName}</option>)
-                    }
-                </select>
+                                <option value="0" disabled>Select personal trainer</option>
+
+                                {
+                                    trainerAvailability.map((availabilitys) => <option key={availabilitys.AvailabilityPersonalTrainerID} value={availabilitys.AvailabilityPersonalTrainerID}>{availabilitys.AvailabilityID}</option>)
+                                }
+
+                            </select>
+                }
             </FormItem>
 
-            
+
+
+                
+                <button>Book Appointment</button>
         </form>
 
     );
