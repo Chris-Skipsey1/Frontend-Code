@@ -24,6 +24,8 @@ function MyMedicines() {
   }
   useEffect(() => { apiCall(endpoint) }, [endpoint]);
 
+  const handleSubmit = (appointment) => {}
+
 
 
   //View

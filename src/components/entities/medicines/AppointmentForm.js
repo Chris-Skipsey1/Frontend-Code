@@ -3,20 +3,24 @@ import API from '../../api/API.js';
 import FormItem from '../../UI/Form.js';
 
 const emptyAppointment = {
-    PersonalTrainerID: 1,
+    PersonalTrainerID: 0,
     PersonalTrainerName: 1,
-    AppointmentDescription: "",
+    AppointmentDescription: "Dummy",
     AppointmentAvailabilityID: 10,
     AppointmentClientID: 10,
-    AvailabilityPersonalTrainerID: 2
+    AvailabilitySlotID: 1,
+    AvailabilityPersonalTrainerID: 0
 }
 
 
-export default function AppointmentForm({ initialAppointment = emptyAppointment }) {
+export default function AppointmentForm({ onSubmit, initialAppointment = emptyAppointment }) {
 
     // Initialisation ---
+    const appointmentsEndpoint = '/appointments';
+
     // State ---
     const [appointment, setAppointment] = useState(initialAppointment);
+    const [personalTrainerID, setPersonalTrainerID] = useState(0);
 
     const [personalTrainers, setPersonalTrainers] = useState(null);
     const [loadingTrainersMessage, setLoadingTrainersMessage] = useState('Loading trainers ...');
@@ -36,21 +40,61 @@ export default function AppointmentForm({ initialAppointment = emptyAppointment 
     const [loadingAvailabilityMessage, setLoadingAvailabilityMessage] = useState('Loading availability ...');
 
     // GET Personal Trainers
-    const getTrainerAvailability = async () => {
-        const response = await API.get('/availability/personaltrainers');
+    const getTrainerAvailability = async (id) => {
+        const response = await API.get(`/availability/personaltrainers/${id}`);
         response.isSuccess
             ? setTrainerAvailability(response.result)
             : setLoadingAvailabilityMessage(response.message)
 
     }
-    useEffect(() => { getTrainerAvailability() }, []);
+    useEffect(() => { getTrainerAvailability(0) }, []);
 
     // Handlers ---
-    const handleChange = (event) => {
+    const handleChange1 = (event) => {
         const { name, value } = event.target;
         const newValue = (name === 'PersonalTrainerID') ? parseInt(value) : value;
+        setAppointment(initialAppointment);
+        setPersonalTrainerID(newValue);
+        getTrainerAvailability(newValue);
+    };
+
+    const handleChange2 = (event) => {
+        const { name, value } = event.target;
+        const newValue = (name === 'AvailabilityPersonalTrainerID') ? parseInt(value) : value;
         setAppointment({ ...appointment, [name]: newValue });
     };
+
+    const descriptionChange = (event) => {
+        const { name, value } = event.target;
+        const newValue = (name === 'AppointmentDescription') ? parseInt(value) : value;
+
+    };
+
+    const handleSubmit = () => {
+
+        onSubmit(appointment);
+    }
+
+    //const isValidAppointment = (appointment) => {
+    //  let isAppointmentValid = true;
+    //  Object.keys(appointment).forEach((key) => {
+    //   if (isValidAppointment[key](module[key])) {
+    //   errors[key] = null;
+    //    } else {
+    //       errors[key] = errorMessage[key];
+    //       isAppointmentValid = false;
+    //      }
+    //   });
+    //  return isAppointmentValid;
+    //  }
+
+    //const handleSubmit = async (appointment) => {
+
+        //const response = await API.post(appointmentsEndpoint, appointment);
+    //};
+
+
+
     // View ---
     return (
         <form className="BorderedForm">
@@ -67,14 +111,14 @@ export default function AppointmentForm({ initialAppointment = emptyAppointment 
                             ? <p>No trainers found</p>
                             : <select
                                 name="PersonalTrainerID"
-                                value={appointment.PersonalTrainerID}
-                                onChange={handleChange}
+                                value={personalTrainerID}
+                                onChange={handleChange1}
                             >
 
                                 <option value="0" disabled>Select personal trainer</option>
 
                                 {
-                                    personalTrainers.map((trainer) => <option key={trainer.PersonalTrainerName} value={trainer.PersonalTrainerID}>{trainer.PersonalTrainerName}</option>)
+                                    personalTrainers.map((trainer) => <option key={trainer.PersonalTrainerID} value={trainer.PersonalTrainerID}>{trainer.PersonalTrainerName} ({trainer.PersonalTrainerID})</option>)
                                 }
 
                             </select>
@@ -89,30 +133,49 @@ export default function AppointmentForm({ initialAppointment = emptyAppointment 
                 error={null}
             >
                 {
-                    !trainerAvailability
-                        ? <p>{loadingAvailabilityMessage}</p>
-                        : trainerAvailability.length === 0
-                            ? <p>No availability found</p>
-                            : <select
-                                name="AvailabilityPersonalTrainerID"
-                                value={appointment.AvailabilityPersonalTrainerID}
-                                onChange={handleChange}
-                            >
 
-                                <option value="0" disabled>Select personal trainer</option>
+                    !personalTrainerID
+                        ? <p>To see a date, first you must select a personal trainer from above.</p>
+                        : !trainerAvailability
+                            ? <p>{loadingAvailabilityMessage}</p>
+                            : trainerAvailability.length === 0
+                                ? <p>No availability found</p>
+                                : <select
+                                    name="AvailabilityPersonalTrainerID"
+                                    value={appointment.AvailabilityPersonalTrainerID}
+                                    onChange={handleChange2}
+                                >
 
-                                {
-                                    trainerAvailability.map((availabilitys) => <option key={availabilitys.AvailabilityPersonalTrainerID} value={availabilitys.AvailabilityPersonalTrainerID}>{availabilitys.AvailabilityID}</option>)
-                                }
+                                    <option value="0" disabled>Select personal trainer</option>
 
-                            </select>
+                                    {
+                                        trainerAvailability.map((availabilitys) => <option key={availabilitys.AvailabilitySlotID} value={availabilitys.AvailabilitySlotID}>{availabilitys.DateAndTime} ({availabilitys.AvailabilitySlotID})</option>)
+                                    }
+
+                                </select>
                 }
             </FormItem>
 
 
+            <FormItem
+                label="Description"
+                htmlFor="AppointmentDescription"
+                advice="Please enter a description!"
+                error={"You need to enter a description"}
+            >
+                <input
+                    type="text"
+                    name="AppointmentDescription"
+                    value={null}
+                    onChange={descriptionChange}
+                />
+            </FormItem>
 
-                
-                <button>Book Appointment</button>
+
+
+
+            <button onClick={handleSubmit}>Book Appointment</button>
+
         </form>
 
     );
