@@ -3,13 +3,14 @@ import API from '../../api/API.js';
 import FormItem from '../../UI/Form.js';
 
 const emptyAppointment = {
-    PersonalTrainerID: 0,
-    PersonalTrainerName: 1,
-    AppointmentDescription: "Dummy",
-    AppointmentAvailabilityID: 10,
-    AppointmentClientID: 10,
-    AvailabilitySlotID: 1,
-    AvailabilityPersonalTrainerID: 0
+    //PersonalTrainerID: 0,
+    //PersonalTrainerName: 1,
+    AppointmentDescription: "",
+    AppointmentAvailabilityID: 0,
+    AppointmentClientID: 9
+    //AvailabilitySlotStateID: 0,
+    //AvailabilityPersonalTrainerID: 0,
+    //AvailabilityID: 0
 }
 
 
@@ -18,12 +19,32 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
     // Initialisation ---
     const appointmentsEndpoint = '/appointments';
 
+    const isValid = {
+        AppointmentClientID: (id) => id !== 0,
+        AppointmentAvailabilityID: (id) => id !== 0,
+        AppointmentDescription: (name) => name.length > 1
+    }
+
+    const errorMessage = {
+        AppointmentDescription: "You need to write more than 2 letters to submit your appointment",
+        PersonalTrainerID: "You must select a personal trainer",
+        AvailabilityPersonalTrainerID: "You must select a personal trainer availability"
+    }
+
     // State ---
     const [appointment, setAppointment] = useState(initialAppointment);
     const [personalTrainerID, setPersonalTrainerID] = useState(0);
 
     const [personalTrainers, setPersonalTrainers] = useState(null);
     const [loadingTrainersMessage, setLoadingTrainersMessage] = useState('Loading trainers ...');
+
+    const [errors, setErrors] = useState(
+        Object.keys(initialAppointment).reduce(
+            (accum, key) => ({ ...accum, [key]: null }), {})
+    );
+
+
+
 
     // GET Personal Trainers
     const getPersonalTrainers = async () => {
@@ -62,47 +83,40 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
         const { name, value } = event.target;
         const newValue = (name === 'AvailabilityPersonalTrainerID') ? parseInt(value) : value;
         setAppointment({ ...appointment, [name]: newValue });
+        setErrors({ ...errors, [name]: isValid[name](newValue) ? null : errorMessage[name] });
     };
 
-    const descriptionChange = (event) => {
-        const { name, value } = event.target;
-        const newValue = (name === 'AppointmentDescription') ? parseInt(value) : value;
-
-    };
-
-    const handleSubmit = () => {
-
-        onSubmit(appointment);
+    const isValidAppointment = (appointment) => {
+        let isAppointmentValid = true;
+        Object.keys(appointment).forEach((key) => {
+            if (isValid[key](appointment[key])) {
+                errors[key] = null;
+            } else {
+                errors[key] = errorMessage[key];
+                isAppointmentValid = false;
+            }
+        });
+        return isAppointmentValid;
     }
 
-    //const isValidAppointment = (appointment) => {
-    //  let isAppointmentValid = true;
-    //  Object.keys(appointment).forEach((key) => {
-    //   if (isValidAppointment[key](module[key])) {
-    //   errors[key] = null;
-    //    } else {
-    //       errors[key] = errorMessage[key];
-    //       isAppointmentValid = false;
-    //      }
-    //   });
-    //  return isAppointmentValid;
-    //  }
-
-    //const handleSubmit = async (appointment) => {
-
-        //const response = await API.post(appointmentsEndpoint, appointment);
-    //};
+    const handleSubmit = () => {
+        onSubmit(appointment);
+        isValidAppointment(appointment);
+        setErrors({...errors});
+        //onSubmit(appointment);
+    }
 
 
 
     // View ---
     return (
         <form className="BorderedForm">
+
             <FormItem
-                label="Personal Trainer Name" // Top label
+                //label="Personal Trainer Name" // Top label
                 htmlFor="PersonalTrainerID"
                 advice="Choose a personal trainer name" // Top advice
-                error={null}
+                error={errors.PersonalTrainerID}
             >
                 {
                     !personalTrainers
@@ -127,11 +141,12 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
 
 
             <FormItem
-                label="Personal Trainer Availability" // Top label
+                //label="Personal Trainer Availability" // Top label
                 htmlFor="AvailabilityPersonalTrainerID"
                 advice="Choose the personal trainer's availability" // Top advice
-                error={null}
+                error={errors.AvailabilityPersonalTrainerID}
             >
+
                 {
 
                     !personalTrainerID
@@ -141,42 +156,44 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
                             : trainerAvailability.length === 0
                                 ? <p>No availability found</p>
                                 : <select
-                                    name="AvailabilityPersonalTrainerID"
-                                    value={appointment.AvailabilityPersonalTrainerID}
+                                    name="AppointmentAvailabilityID"
+                                    value={appointment.AppointmentAvailabilityID}
                                     onChange={handleChange2}
                                 >
 
-                                    <option value="0" disabled>Select personal trainer</option>
+                                    <option value="0" disabled>Select the personal trainer's available date from this dropdown</option>
 
                                     {
-                                        trainerAvailability.map((availabilitys) => <option key={availabilitys.AvailabilitySlotID} value={availabilitys.AvailabilitySlotID}>{availabilitys.DateAndTime} ({availabilitys.AvailabilitySlotID})</option>)
+                                        trainerAvailability.map((availabilitys) => <option key={availabilitys.AvailabilityID} value={availabilitys.AvailabilityID}>{availabilitys.DateAndTime} ({availabilitys.AvailabilityID})</option>)
                                     }
 
                                 </select>
                 }
             </FormItem>
 
-
             <FormItem
-                label="Description"
+                //label="Enter a Description"
                 htmlFor="AppointmentDescription"
-                advice="Please enter a description!"
-                error={"You need to enter a description"}
+                advice="Write something to your trainer. This could be any details you would like to let the trainer know*" // Top advice
+                error={errors.AppointmentDescription}
             >
                 <input
                     type="text"
                     name="AppointmentDescription"
-                    value={null}
-                    onChange={descriptionChange}
+                    value={appointment.AppointmentDescription}
+                    onChange={handleChange2}
                 />
+               
+
             </FormItem>
+            
 
 
 
 
-            <button onClick={handleSubmit}>Book Appointment</button>
+            <button disabled={appointment.AppointmentDescription.length >= 2 ? false:  true } onClick={handleSubmit} className="buttonStuff">Book Appointment</button>
 
         </form>
-
+        //<p>{appointment.AppointmentDescription.length < 2 ? "" : ""}</p>
     );
 }
