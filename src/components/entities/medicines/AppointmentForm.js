@@ -103,7 +103,6 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
         onSubmit(appointment);
         isValidAppointment(appointment);
         setErrors({...errors});
-        //onSubmit(appointment);
     }
 
 
@@ -132,7 +131,7 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
                                 <option value="0" disabled>Select personal trainer</option>
 
                                 {
-                                    personalTrainers.map((trainer) => <option key={trainer.PersonalTrainerID} value={trainer.PersonalTrainerID}>{trainer.PersonalTrainerName} ({trainer.PersonalTrainerID})</option>)
+                                    personalTrainers.map((trainer) => <option key={trainer.PersonalTrainerID} value={trainer.PersonalTrainerID}>{trainer.PersonalTrainerName}</option>)
                                 }
 
                             </select>
@@ -164,7 +163,7 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
                                     <option value="0" disabled>Select the personal trainer's available date from this dropdown</option>
 
                                     {
-                                        trainerAvailability.map((availabilitys) => <option key={availabilitys.AvailabilityID} value={availabilitys.AvailabilityID}>{availabilitys.DateAndTime} ({availabilitys.AvailabilityID})</option>)
+                                        trainerAvailability.map((availabilitys) => <option key={availabilitys.AvailabilityID} value={availabilitys.AvailabilityID}>{availabilitys.DateAndTime}</option>) // ({availabilitys.AvailabilityID})
                                     }
 
                                 </select>
