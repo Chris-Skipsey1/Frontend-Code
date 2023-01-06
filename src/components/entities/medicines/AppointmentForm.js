@@ -50,8 +50,8 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
     // --- Refactored - working
 
     // Refactoring - Not working ---
-    const id = 1;
-    const [trainerAvailability, , loadTrainerAvailability, loadingAvailabilityMessage,] = useLoad(`/availability/personaltrainers/${id}`);
+    const [id, loadTrainerAvailability] = useState(0);
+    const [trainerAvailability, , loadingAvailabilityMessage,] = useLoad(`/availability/personaltrainers/${id}`);
     // --- Refactoring - Not working
     
     // BEFORE REFACTOR ---
