@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import API from '../api/API.js';
+//import { useState, useEffect } from 'react';
+//import API from '../api/API.js';
+import useLoad from '../api/useLoad.js';
 import Card from '../UI/Card.js';
 import MedicineCard from '../entities/medicines/MedicineCard.js';
 
@@ -9,22 +10,14 @@ function MyMedicines() {
   const loggedInUserID = 5;
   const endpoint = `/medicines/clients/${loggedInUserID}`;
 
-  //State
-  const [medicines, setMedicines] = useState(null);
-  const [loadingMessage, setLoadingMessage] = useState('Loading medicines ...');
+  // useLoad
 
-  //Context
-  //Methods
-  const apiCall = async (endpoint) => {
-    const response = await API.get(endpoint);
-    response.isSuccess
-      ? setMedicines(response.result)
-      : setLoadingMessage(response.message)
 
-  }
-  useEffect(() => { apiCall(endpoint) }, [endpoint]);
+  // State-----
 
-  const handleSubmit = (appointment) => {}
+  const [medicines, , loadingMessage,] = useLoad(endpoint);
+
+  //const handleSubmit = (appointment) => {}
 
 
 

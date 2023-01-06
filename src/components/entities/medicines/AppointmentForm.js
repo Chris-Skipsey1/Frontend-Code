@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import API from '../../api/API.js';
-import FormItem from '../../UI/Form.js';
+import useLoad from '../../api/useLoad.js';
+import Form from '../../UI/Form.js';
+
 
 const emptyAppointment = {
     //PersonalTrainerID: 0,
@@ -17,7 +19,7 @@ const emptyAppointment = {
 export default function AppointmentForm({ onSubmit, initialAppointment = emptyAppointment }) {
 
     // Initialisation ---
-    const appointmentsEndpoint = '/appointments';
+    //const appointmentsEndpoint = '/appointments';
 
     const isValid = {
         AppointmentClientID: (id) => id !== 0,
@@ -31,44 +33,34 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
         AvailabilityPersonalTrainerID: "You must select a personal trainer availability"
     }
 
-    // State ---
-    const [appointment, setAppointment] = useState(initialAppointment);
-    const [personalTrainerID, setPersonalTrainerID] = useState(0);
-
-    const [personalTrainers, setPersonalTrainers] = useState(null);
-    const [loadingTrainersMessage, setLoadingTrainersMessage] = useState('Loading trainers ...');
-
-    const [errors, setErrors] = useState(
-        Object.keys(initialAppointment).reduce(
-            (accum, key) => ({ ...accum, [key]: null }), {})
-    );
-
-
-
-
     // GET Personal Trainers
-    const getPersonalTrainers = async () => {
-        const response = await API.get('/personaltrainers');
-        response.isSuccess
-            ? setPersonalTrainers(response.result)
-            : setLoadingTrainersMessage(response.message)
+    // State ---
+    const [appointment, setAppointment, errors, setErrors] = Form.useForm(initialAppointment);
 
-    }
-    useEffect(() => { getPersonalTrainers() }, []);
+    //const conformanceFields = ['PersonalTrainerID'];
+   
 
 
+
+    const [personalTrainerID, setPersonalTrainerID] = useState(0);
+    
+    // useLoad
+    const [personalTrainers, , loadingTrainersMessage,] = useLoad('/personaltrainers');
+    //const [trainerAvailability, loadTrainerAvailability, loadingAvailabilityMessage,] = useLoad(`/availability/personaltrainers/${id}`);
+    
+    
+    // BELOW is old
+    // GET Personal Trainer Availability
     const [trainerAvailability, setTrainerAvailability] = useState(null);
     const [loadingAvailabilityMessage, setLoadingAvailabilityMessage] = useState('Loading availability ...');
-
-    // GET Personal Trainers
-    const getTrainerAvailability = async (id) => {
+    const loadTrainerAvailability = async (id) => {
         const response = await API.get(`/availability/personaltrainers/${id}`);
         response.isSuccess
             ? setTrainerAvailability(response.result)
             : setLoadingAvailabilityMessage(response.message)
 
     }
-    useEffect(() => { getTrainerAvailability(0) }, []);
+    useEffect(() => { loadTrainerAvailability(0) }, []);
 
     // Handlers ---
     const handleChange1 = (event) => {
@@ -76,7 +68,7 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
         const newValue = (name === 'PersonalTrainerID') ? parseInt(value) : value;
         setAppointment(initialAppointment);
         setPersonalTrainerID(newValue);
-        getTrainerAvailability(newValue);
+        loadTrainerAvailability(newValue);
     };
 
     const handleChange2 = (event) => {
@@ -109,9 +101,9 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
 
     // View ---
     return (
-        <form className="BorderedForm">
+        <Form>
 
-            <FormItem
+            <Form.Item
                 //label="Personal Trainer Name" // Top label
                 htmlFor="PersonalTrainerID"
                 advice="Choose a personal trainer name" // Top advice
@@ -136,10 +128,10 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
 
                             </select>
                 }
-            </FormItem>
+            </Form.Item>
 
 
-            <FormItem
+            <Form.Item
                 //label="Personal Trainer Availability" // Top label
                 htmlFor="AvailabilityPersonalTrainerID"
                 advice="Choose the personal trainer's availability" // Top advice
@@ -168,9 +160,9 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
 
                                 </select>
                 }
-            </FormItem>
+            </Form.Item>
 
-            <FormItem
+            <Form.Item
                 //label="Enter a Description"
                 htmlFor="AppointmentDescription"
                 advice="Write something to your trainer. This could be any details you would like to let the trainer know*" // Top advice
@@ -184,15 +176,11 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
                 />
                
 
-            </FormItem>
+            </Form.Item>
             
-
-
-
-
             <button disabled={appointment.AppointmentDescription.length >= 2 ? false:  true } onClick={handleSubmit} className="buttonStuff">Book Appointment</button>
 
-        </form>
+        </Form>
         //<p>{appointment.AppointmentDescription.length < 2 ? "" : ""}</p>
     );
 }
