@@ -45,22 +45,28 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
     const [personalTrainerID, setPersonalTrainerID] = useState(0);
     
     // useLoad
+    // Refactored - working ---
     const [personalTrainers, , loadingTrainersMessage,] = useLoad('/personaltrainers');
-    //const [trainerAvailability, loadTrainerAvailability, loadingAvailabilityMessage,] = useLoad(`/availability/personaltrainers/${id}`);
-    
-    
-    // BELOW is old
-    // GET Personal Trainer Availability
-    const [trainerAvailability, setTrainerAvailability] = useState(null);
-    const [loadingAvailabilityMessage, setLoadingAvailabilityMessage] = useState('Loading availability ...');
-    const loadTrainerAvailability = async (id) => {
-        const response = await API.get(`/availability/personaltrainers/${id}`);
-        response.isSuccess
-            ? setTrainerAvailability(response.result)
-            : setLoadingAvailabilityMessage(response.message)
+    // --- Refactored - working
 
-    }
-    useEffect(() => { loadTrainerAvailability(0) }, []);
+    // Refactoring - Not working ---
+    const id = 1;
+    const [trainerAvailability, , loadTrainerAvailability, loadingAvailabilityMessage,] = useLoad(`/availability/personaltrainers/${id}`);
+    // --- Refactoring - Not working
+    
+    // BEFORE REFACTOR ---
+    // GET Personal Trainer Availability
+    //const [trainerAvailability, setTrainerAvailability] = useState(null);
+    //const [loadingAvailabilityMessage, setLoadingAvailabilityMessage] = useState('Loading availability ...');
+    //const loadTrainerAvailability = async (id) => {
+        //const response = await API.get(`/availability/personaltrainers/${id}`);
+        //response.isSuccess
+            //? setTrainerAvailability(response.result)
+            //: setLoadingAvailabilityMessage(response.message)
+    //}
+    //useEffect(() => { loadTrainerAvailability(0) }, []);
+    // --- BEFORE REFACTOR
+
 
     // Handlers ---
     const handleChange1 = (event) => {
