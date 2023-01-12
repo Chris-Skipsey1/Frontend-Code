@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import API from '../../api/API.js';
+import { useState } from 'react';
+//import API from '../../api/API.js';
 import useLoad from '../../api/useLoad.js';
 import Form from '../../UI/Form.js';
 
@@ -15,33 +15,28 @@ const emptyAppointment = {
     //AvailabilityID: 0
 }
 
-
+//Dont undo from here
 export default function AppointmentForm({ onSubmit, initialAppointment = emptyAppointment }) {
+    //const appointmentsEndpoint = '/appointments';
 
     // Initialisation ---
-    //const appointmentsEndpoint = '/appointments';
 
     const isValid = {
         AppointmentClientID: (id) => id !== 0,
         AppointmentAvailabilityID: (id) => id !== 0,
         AppointmentDescription: (name) => name.length > 1
     }
-
     const errorMessage = {
         AppointmentDescription: "You need to write more than 2 letters to submit your appointment",
         PersonalTrainerID: "You must select a personal trainer",
         AvailabilityPersonalTrainerID: "You must select a personal trainer availability"
     }
 
+      const conformance = ['PersonalTrainerID', 'AvailabilityPersonalTrainerID'];
+
     // GET Personal Trainers
     // State ---
-    const [appointment, setAppointment, errors, setErrors] = Form.useForm(initialAppointment);
-
-    //const conformanceFields = ['PersonalTrainerID'];
-   
-
-
-
+    const [appointment, setAppointment, errors, handleChange2, handleSubmit] = Form.useForm(initialAppointment, conformance, {isValid, errorMessage}, onSubmit);
     const [personalTrainerID, setPersonalTrainerID] = useState(0);
     
     // useLoad
@@ -68,7 +63,13 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
     // --- BEFORE REFACTOR
 
 
+      // Conformance
+
     // Handlers ---
+   
+
+
+    //old
     const handleChange1 = (event) => {
         const { name, value } = event.target;
         const newValue = (name === 'PersonalTrainerID') ? parseInt(value) : value;
@@ -77,31 +78,15 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
         loadTrainerAvailability(newValue);
     };
 
-    const handleChange2 = (event) => {
-        const { name, value } = event.target;
-        const newValue = (name === 'AvailabilityPersonalTrainerID') ? parseInt(value) : value;
-        setAppointment({ ...appointment, [name]: newValue });
-        setErrors({ ...errors, [name]: isValid[name](newValue) ? null : errorMessage[name] });
-    };
+   // Old
+    //const handleChange2 = (event) => {
+        //const { name, value } = event.target;
+        //const newValue = (name === 'AvailabilityPersonalTrainerID') ? parseInt(value) : value;
+        //setAppointment({ ...appointment, [name]: newValue });
+        //setErrors({ ...errors, [name]: isValid[name](newValue) ? null : errorMessage[name] });
+    //};
 
-    const isValidAppointment = (appointment) => {
-        let isAppointmentValid = true;
-        Object.keys(appointment).forEach((key) => {
-            if (isValid[key](appointment[key])) {
-                errors[key] = null;
-            } else {
-                errors[key] = errorMessage[key];
-                isAppointmentValid = false;
-            }
-        });
-        return isAppointmentValid;
-    }
-
-    const handleSubmit = () => {
-        onSubmit(appointment);
-        isValidAppointment(appointment);
-        setErrors({...errors});
-    }
+  
 
 
 

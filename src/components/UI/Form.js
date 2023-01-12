@@ -42,7 +42,7 @@ function Item({ children, label, htmlFor, advice, error }) {
     );
 }
 
-function useForm(initialRecord) {
+function useForm(initialRecord, conformance, {isValid, errorMessage}, onSubmit) {
     // Initialisation
     // Hooks
     // State
@@ -53,8 +53,34 @@ function useForm(initialRecord) {
     );
     // Context
     // Handlers
+    const handleChange2 = (event) => {
+        const { name, value } = event.target;
+        const newValue = conformance.includes(name) ? parseInt(value) : value;
+        setRecord({ ...record, [name]: newValue });
+        setErrors({ ...errors, [name]: isValid[name](newValue) ? null : errorMessage[name] });
+    };
+
+    const isValidRecord = (record) => {
+        let isRecordValid = true;
+        Object.keys(record).forEach((key) => {
+            if (isValid[key](record[key])) {
+                errors[key] = null;
+            } else {
+                errors[key] = isValid.errorMessage[key];
+                isRecordValid = false;
+            }
+        });
+        return isRecordValid;
+    }
+
+    const handleSubmit = () => {
+        onSubmit(record);
+        isValidRecord(record);
+        setErrors({...errors});
+    }
+
     // View
-    return [record, setRecord, errors, setErrors];
+    return [record, setRecord, errors, handleChange2, handleSubmit];
         
     
 }
