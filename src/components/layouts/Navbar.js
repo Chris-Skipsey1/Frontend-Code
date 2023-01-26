@@ -14,7 +14,7 @@ function Navbar() {
                 <NavLink to='/bookappointment' className={getLinkStyle}>Book an Appointment</NavLink>
             </div>
             <div className="navItem">
-                <NavLink to='/contact' className={getLinkStyle}>Contact Us</NavLink>
+                <NavLink to='/contact' className={getLinkStyle}>Booked Appointments</NavLink>
             </div>
 
 

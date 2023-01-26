@@ -9,7 +9,7 @@ const emptyAppointment = {
     //PersonalTrainerName: 1,
     AppointmentDescription: "",
     AppointmentAvailabilityID: 0,
-    AppointmentClientID: 9
+    AppointmentClientID: 2
     //AvailabilitySlotStateID: 0,
     //AvailabilityPersonalTrainerID: 0,
     //AvailabilityID: 0

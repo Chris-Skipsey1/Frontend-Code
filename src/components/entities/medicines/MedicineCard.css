@@ -2,5 +2,14 @@
     width: 350px;
     height: 400px;
     padding: 10px;
-
 }
+
+.centerIt {
+text-align: center;
+margin: auto;
+font-weight: bold;
+width: 50%;
+border: 3px solid #25136b;
+padding: 10px;
+}
+
