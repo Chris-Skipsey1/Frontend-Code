@@ -2,7 +2,12 @@
     width: 350px;
     height: 400px;
     padding: 10px;
+    
 }
+
+.MedicineCard:hover {
+    box-shadow: 5px 5px 8px #888888;
+  }
 
 .centerIt {
 text-align: center;
@@ -11,5 +16,6 @@ font-weight: bold;
 width: 50%;
 border: 3px solid #25136b;
 padding: 10px;
+box-shadow: 3px 3px 8px #888888;
 }
 
