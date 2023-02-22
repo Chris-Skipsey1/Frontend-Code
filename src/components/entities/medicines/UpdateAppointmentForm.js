@@ -15,6 +15,8 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
     //const appointmentsEndpoint = '/appointments';
     console.log(JSON.stringify(initialAppointment));
     // Initialisation ---
+    const personalTrainerID = initialAppointment.AvailabilityPersonalTrainerID;
+
 
     const isValid = {
         AppointmentClientID: (id) => id !== 0,
@@ -32,7 +34,7 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
     // GET Personal Trainers
     // State ---
     const [appointment, setAppointment, errors, handleChange2, handleSubmit] = Form.useForm(initialAppointment, conformance, {isValid, errorMessage}, onSubmit);
-    const [personalTrainerID, setPersonalTrainerID] = useState(0);
+    //const [personalTrainerID, setPersonalTrainerID] = useState(0);
     
     // useLoad
     // Refactored - working ---
@@ -44,19 +46,7 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
     const [trainerAvailability, , loadingAvailabilityMessage,] = useLoad(`/availability/personaltrainers/${id}`);
     // --- Refactoring - Not working
     
-    // BEFORE REFACTOR ---
-    // GET Personal Trainer Availability
-    //const [trainerAvailability, setTrainerAvailability] = useState(null);
-    //const [loadingAvailabilityMessage, setLoadingAvailabilityMessage] = useState('Loading availability ...');
-    //const loadTrainerAvailability = async (id) => {
-        //const response = await API.get(`/availability/personaltrainers/${id}`);
-        //response.isSuccess
-            //? setTrainerAvailability(response.result)
-            //: setLoadingAvailabilityMessage(response.message)
-    //}
-    //useEffect(() => { loadTrainerAvailability(0) }, []);
-    // --- BEFORE REFACTOR
-
+   
 
       // Conformance
 
@@ -69,11 +59,11 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
         const { name, value } = event.target;
         const newValue = (name === 'PersonalTrainerID') ? parseInt(value) : value;
         setAppointment(initialAppointment);
-        setPersonalTrainerID(newValue);
+        //setPersonalTrainerID(newValue);
         loadTrainerAvailability(newValue);
     };
 
-   // Old
+   //Old
     //const handleChange2 = (event) => {
         //const { name, value } = event.target;
         //const newValue = (name === 'AvailabilityPersonalTrainerID') ? parseInt(value) : value;
@@ -164,7 +154,7 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
 
             </Form.Item>
             
-            <button disabled={appointment.AppointmentDescription.length >= 2 ? false:  true } onClick={handleSubmit} className="buttonStuff">Book Appointment</button>
+            <button disabled={appointment.AppointmentDescription.length >= 2 ? false:  true } onClick={handleSubmit} className="buttonStuff">Update Appointment</button>
 
         </Form>
         //<p>{appointment.AppointmentDescription.length < 2 ? "" : ""}</p>

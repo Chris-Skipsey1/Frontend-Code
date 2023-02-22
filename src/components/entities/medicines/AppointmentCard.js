@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import Card from '../../UI/Card.js';
 import './MedicineCard.css';
 
+
+
 Card.propTypes = {
     onClick: PropTypes.func,
     isParentHovering: PropTypes.bool
@@ -24,7 +26,10 @@ export default function AppointmentCard({ appointment, onClick, isParentHovering
                 <div>{`Your name: ${appointment.ClientName}`} </div>
                 <div>{`Personal Trainer's name: ${appointment.PersonalTrainerName}`} </div>
                 <div>{`Appointment date: ${appointment.DateAndTime}`}    </div>
+                <br></br>
+                
             </div>
+            
         </Card>
     );
 }

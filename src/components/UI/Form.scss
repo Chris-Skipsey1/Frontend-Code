@@ -104,3 +104,17 @@ div.FormItem {
   background-color: #4CAF50; /* Green */
   color: white;
 }
+
+.secondButtonStuff {
+  background-color: green;
+  border-color: black;
+  padding: 5px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  cursor: pointer;
+  font-weight : bold;
+  font-size: 16.5px;
+}
+.secondButtonStuff:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
