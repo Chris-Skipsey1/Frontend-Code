@@ -2,12 +2,13 @@ import { useState } from 'react';
 //import API from '../../api/API.js';
 import useLoad from '../../api/useLoad.js';
 import Form from '../../UI/Form.js';
+import API from '../../api/API.js';
 
 
 const emptyAppointment = {
     AppointmentDescription: "",
     AppointmentAvailabilityID: 0,
-    AppointmentClientID: 2
+    AppointmentClientID: 50
 }
 
 //Dont undo from here
@@ -15,7 +16,9 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
     //const appointmentsEndpoint = '/appointments';
     console.log(JSON.stringify(initialAppointment));
     // Initialisation ---
-    const personalTrainerID = initialAppointment.AvailabilityPersonalTrainerID;
+    const [personalTrainerID, setPersonalTrainerID] = useState(initialAppointment.AvailabilityPersonalTrainerID);
+    const AvailabilityID = initialAppointment.AvailabilityID;
+    console.log(initialAppointment);
 
 
     const isValid = {
@@ -42,10 +45,23 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
     // --- Refactored - working
 
     // Refactoring - Not working ---
-    const [id, loadTrainerAvailability] = useState(0);
+    const [id, loadTrainerAvailability] = useState(AvailabilityID); //state.appointment.AppointmentAvailabilityID
     const [trainerAvailability, , loadingAvailabilityMessage,] = useLoad(`/availability/personaltrainers/${id}`);
-    // --- Refactoring - Not working
+    console.log(errors.AvailabilityPersonalTrainerID);
     
+    // --- Refactoring - Not working
+    const appointmentsEndpoint = '/appointments';
+    const handleSubmit1 = async (appointment) => {
+       // handleSubmit();
+        const response = await API.put(`${appointmentsEndpoint}/${appointment.AppointmentID}`, appointment);
+        if ( response.isSuccess ) {
+          <p>Completed.</p>
+        }
+      }
+
+    const handlePreSubmit = () => {
+        handleSubmit();
+    }
    
 
       // Conformance
@@ -57,10 +73,24 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
     //old
     const handleChange1 = (event) => {
         const { name, value } = event.target;
+        console.log(name + ` ` + value);
         const newValue = (name === 'PersonalTrainerID') ? parseInt(value) : value;
-        setAppointment(initialAppointment);
+        switch (name) {
+            case 'PersonalTrainerID':
+                setPersonalTrainerID(newValue);
+                // call endpoint 
+                //loadTrainerAvailability();
+                break;
+            default:
+                loadTrainerAvailability(newValue); 
+        }
+        
+        //setAppointment(initialAppointment);
+        console.log(event.target.value);
+        console.log(initialAppointment);
         //setPersonalTrainerID(newValue);
-        loadTrainerAvailability(newValue);
+        //loadTrainerAvailability(newValue); 
+        
     };
 
    //Old
@@ -71,6 +101,9 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
         //setErrors({ ...errors, [name]: isValid[name](newValue) ? null : errorMessage[name] });
     //};
 
+    function popup() {
+        alert("Your appointment has been successfully updated.");
+    }
   
 
 
@@ -154,8 +187,8 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
 
             </Form.Item>
             
-            <button disabled={appointment.AppointmentDescription.length >= 2 ? false:  true } onClick={handleSubmit} className="buttonStuff">Update Appointment</button>
-
+            <button disabled={appointment.AppointmentDescription.length >= 2 ? false:  true } onClick={() => [handlePreSubmit(), popup()]} className="buttonStuff">Update Appointment</button>
+            
         </Form>
         //<p>{appointment.AppointmentDescription.length < 2 ? "" : ""}</p>
     );

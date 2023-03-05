@@ -8,7 +8,7 @@ Card.propTypes = {
     onClick: PropTypes.func,
     isParentHovering: PropTypes.bool
 };
-
+//<p>Note: Pressing the cancel button will cancel the appointment. You cannot undo this action.</p>
 export default function AppointmentCard({ appointment, onClick, isParentHovering = false }) {
     // Properties ----------------------------------
     // Hooks ---------------------------------------
@@ -27,6 +27,9 @@ export default function AppointmentCard({ appointment, onClick, isParentHovering
                 <div>{`Personal Trainer's name: ${appointment.PersonalTrainerName}`} </div>
                 <div>{`Appointment date: ${appointment.DateAndTime}`}    </div>
                 <br></br>
+                <br></br>
+                <br></br>
+                
                 
             </div>
             

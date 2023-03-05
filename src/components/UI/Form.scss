@@ -8,7 +8,7 @@ $Green: #29e7cd; // Cyan
 $DarkGreen: darken($Green, 10%);
 $BorderGrey: LightGrey;
 
-form {
+.borderlayout {
   width: 100%;
   padding: 10px 0; 
 
@@ -22,7 +22,7 @@ form {
   div.FormTray {
     width: 100%;
     margin-bottom: 20px;
-
+    
 
   }
 

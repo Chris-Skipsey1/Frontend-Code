@@ -9,14 +9,14 @@ export default function Form({children}) {
     // Handlers
     // View
     return (
-        <form className="BorderedForm">
+        <borderlayout className="BorderedForm">
             <div className="FormTray">
                 {
                 children
                 }
             </div>
 
-        </form>
+        </borderlayout>
     );
 }
 
@@ -62,7 +62,7 @@ function useForm(initialRecord, conformance, {isValid, errorMessage}, onSubmit) 
 
     const isValidRecord = (record) => {
         let isRecordValid = true;
-        Object.keys(record).forEach((key) => {
+        Object.keys(isValid).forEach((key) => {
             if (isValid[key](record[key])) {
                 errors[key] = null;
             } else {
@@ -77,6 +77,7 @@ function useForm(initialRecord, conformance, {isValid, errorMessage}, onSubmit) 
         onSubmit(record);
         isValidRecord(record);
         setErrors({...errors});
+        
     }
 
     // View

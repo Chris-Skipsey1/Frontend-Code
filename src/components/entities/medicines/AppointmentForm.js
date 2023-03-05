@@ -7,7 +7,7 @@ import Form from '../../UI/Form.js';
 const emptyAppointment = {
     AppointmentDescription: "",
     AppointmentAvailabilityID: 0,
-    AppointmentClientID: 2
+    AppointmentClientID: 50
 }
 
 //Dont undo from here
@@ -27,12 +27,17 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
         AppointmentDescription: "You need to write more than 2 letters to submit your appointment"
     }
 
+    
+
       const conformance = ['AppointmentClientID', 'AppointmentAvailabilityID'];
 
     // GET Personal Trainers
     // State ---
     const [appointment, setAppointment, errors, handleChange2, handleSubmit] = Form.useForm(initialAppointment, conformance, {isValid, errorMessage}, onSubmit);
     const [personalTrainerID, setPersonalTrainerID] = useState(0);
+
+
+    
     
     // useLoad
     // Refactored - working ---
@@ -82,13 +87,15 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
     //};
 
   
-
-
+    
+    function popup() {
+        alert("Your appointment has been successfully submitted! Go to the List Appointments page to edit or cancel this appointment.");
+    }
 
     // View ---
     return (
         <Form>
-
+       
             <Form.Item
                 //label="Personal Trainer Name" // Top label
                 htmlFor="PersonalTrainerID"
@@ -163,9 +170,11 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
                
 
             </Form.Item>
-            
-            <button disabled={appointment.AppointmentDescription.length >= 2 ? false:  true } onClick={handleSubmit} className="buttonStuff">Book Appointment</button>
 
+            
+            
+            <button disabled={appointment.AppointmentDescription.length >= 2 ? false:  true } onClick={() => [handleSubmit(), popup()]} className="buttonStuff">Book Appointment</button>
+               
         </Form>
         //<p>{appointment.AppointmentDescription.length < 2 ? "" : ""}</p>
     );

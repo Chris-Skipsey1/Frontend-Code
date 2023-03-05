@@ -9,6 +9,7 @@ function BookAppointment() {
   //Handle
   const handleSubmit = async (appointment) => {
     const response = await API.post(appointmentsEndpoint, appointment);
+    
   }
   //View
   return (

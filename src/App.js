@@ -21,9 +21,11 @@ function App() {
           <Route path='/updateappointment' element={<UpdateAppointment />} />
           <Route path='/myexercises' element={<MyExercises />} />
           <Route path='*' element={<PageNotFound />} />
-          
+            
+
         </Routes>
       </Layout>
+      
     </BrowserRouter>
 
   );
