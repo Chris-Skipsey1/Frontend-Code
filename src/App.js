@@ -4,6 +4,8 @@ import BookAppointment from './components/pages/BookAppointment';
 import ListAppointments from './components/pages/ListAppointments';
 import UpdateAppointment from './components/pages/UpdateAppointment';
 import MyExercises from './components/pages/MyExercises';
+import Client from './components/pages/Client';
+import FavoriteExercisesPage from './components/pages/favoriteexercises';
 import PageNotFound from './components/pages/404';
 import Layout from './components/layouts/Layout';
 
@@ -15,11 +17,13 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route exact path='/' element={<MyMedicines />} />
+          <Route exact path='/mymedicines' element={<MyMedicines />} />
           <Route path='/bookappointment' element={<BookAppointment />} />
           <Route path='/listappointments' element={<ListAppointments />} />
           <Route path='/updateappointment' element={<UpdateAppointment />} />
           <Route path='/myexercises' element={<MyExercises />} />
+          <Route path='/clients' element={<Client />} />
+          <Route path='/favoriteexercises' element={<FavoriteExercisesPage />} />
           <Route path='*' element={<PageNotFound />} />
             
 

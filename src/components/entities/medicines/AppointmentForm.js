@@ -1,5 +1,4 @@
 import { useState } from 'react';
-//import API from '../../api/API.js';
 import useLoad from '../../api/useLoad.js';
 import Form from '../../UI/Form.js';
 
@@ -10,12 +9,13 @@ const emptyAppointment = {
     AppointmentClientID: 50
 }
 
-//Dont undo from here
+
+
 export default function AppointmentForm({ onSubmit, initialAppointment = emptyAppointment }) {
     //const appointmentsEndpoint = '/appointments';
     console.log(JSON.stringify(initialAppointment));
+    
     // Initialisation ---
-
     const isValid = {
         AppointmentClientID: (id) => id !== 0,
         AppointmentAvailabilityID: (id) => id !== 0,
@@ -26,50 +26,19 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
         AppointmentAvailabilityID: "You must select an availability slot",
         AppointmentDescription: "You need to write more than 2 letters to submit your appointment"
     }
-
-    
-
-      const conformance = ['AppointmentClientID', 'AppointmentAvailabilityID'];
-
+    // Conformance
+    const conformance = ['AppointmentClientID', 'AppointmentAvailabilityID'];
     // GET Personal Trainers
     // State ---
     const [appointment, setAppointment, errors, handleChange2, handleSubmit] = Form.useForm(initialAppointment, conformance, {isValid, errorMessage}, onSubmit);
     const [personalTrainerID, setPersonalTrainerID] = useState(0);
 
-
-    
-    
     // useLoad
-    // Refactored - working ---
     const [personalTrainers, , loadingTrainersMessage,] = useLoad('/personaltrainers');
-    // --- Refactored - working
-
-    // Refactoring - Not working ---
     const [id, loadTrainerAvailability] = useState(0);
     const [trainerAvailability, , loadingAvailabilityMessage,] = useLoad(`/availability/personaltrainers/${id}`);
-    // --- Refactoring - Not working
-    
-    // BEFORE REFACTOR ---
-    // GET Personal Trainer Availability
-    //const [trainerAvailability, setTrainerAvailability] = useState(null);
-    //const [loadingAvailabilityMessage, setLoadingAvailabilityMessage] = useState('Loading availability ...');
-    //const loadTrainerAvailability = async (id) => {
-        //const response = await API.get(`/availability/personaltrainers/${id}`);
-        //response.isSuccess
-            //? setTrainerAvailability(response.result)
-            //: setLoadingAvailabilityMessage(response.message)
-    //}
-    //useEffect(() => { loadTrainerAvailability(0) }, []);
-    // --- BEFORE REFACTOR
-
-
-      // Conformance
 
     // Handlers ---
-   
-
-
-    //old
     const handleChange1 = (event) => {
         const { name, value } = event.target;
         const newValue = (name === 'PersonalTrainerID') ? parseInt(value) : value;
@@ -78,26 +47,13 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
         loadTrainerAvailability(newValue);
     };
 
-   // Old
-    //const handleChange2 = (event) => {
-        //const { name, value } = event.target;
-        //const newValue = (name === 'AvailabilityPersonalTrainerID') ? parseInt(value) : value;
-        //setAppointment({ ...appointment, [name]: newValue });
-        //setErrors({ ...errors, [name]: isValid[name](newValue) ? null : errorMessage[name] });
-    //};
-
-  
-    
     function popup() {
         alert("Your appointment has been successfully submitted! Go to the List Appointments page to edit or cancel this appointment.");
     }
-
     // View ---
     return (
         <Form>
-       
             <Form.Item
-                //label="Personal Trainer Name" // Top label
                 htmlFor="PersonalTrainerID"
                 advice="Choose a personal trainer name" // Top advice
                 error={errors.PersonalTrainerID}
@@ -112,27 +68,19 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
                                 value={personalTrainerID}
                                 onChange={handleChange1}
                             >
-
                                 <option value="0" disabled>Select personal trainer</option>
-
                                 {
                                     personalTrainers.map((trainer) => <option key={trainer.PersonalTrainerID} value={trainer.PersonalTrainerID}>{trainer.PersonalTrainerName}</option>)
                                 }
-
                             </select>
                 }
             </Form.Item>
-
-
             <Form.Item
-                //label="Personal Trainer Availability" // Top label
                 htmlFor="AvailabilityPersonalTrainerID"
                 advice="Choose the personal trainer's availability" // Top advice
                 error={errors.AvailabilityPersonalTrainerID}
             >
-
                 {
-
                     !personalTrainerID
                         ? <p>To see a date, first you must select a personal trainer from above.</p>
                         : !trainerAvailability
@@ -144,19 +92,14 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
                                     value={appointment.AppointmentAvailabilityID}
                                     onChange={handleChange2}
                                 >
-
                                     <option value="0" disabled>Select the personal trainer's available date from this dropdown</option>
-
                                     {
                                         trainerAvailability.map((availabilitys) => <option key={availabilitys.AvailabilityID} value={availabilitys.AvailabilityID}>{availabilitys.DateAndTime}</option>) // ({availabilitys.AvailabilityID})
                                     }
-
                                 </select>
                 }
             </Form.Item>
-
             <Form.Item
-                //label="Enter a Description"
                 htmlFor="AppointmentDescription"
                 advice="Write something to your trainer. This could be any details you would like to let the trainer know*" // Top advice
                 error={errors.AppointmentDescription}
@@ -167,15 +110,8 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
                     value={appointment.AppointmentDescription}
                     onChange={handleChange2}
                 />
-               
-
             </Form.Item>
-
-            
-            
             <button disabled={appointment.AppointmentDescription.length >= 2 ? false:  true } onClick={() => [handleSubmit(), popup()]} className="buttonStuff">Book Appointment</button>
-               
         </Form>
-        //<p>{appointment.AppointmentDescription.length < 2 ? "" : ""}</p>
     );
 }

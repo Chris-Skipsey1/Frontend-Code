@@ -4,10 +4,10 @@ import './Header.css';
 function Header() {
     return (
         <header>
-            <Link to="/">
+            <Link to="/mymedicines">
                 <img src="https://img.icons8.com/pastel-glyph/60/hospital--v1.png" alt="person" />
             </Link>
-            <Link to="/">
+            <Link to="/mymedicines">
                 <h1>Improve your Health!</h1>
             </Link>
             <div className="login">

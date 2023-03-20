@@ -8,7 +8,7 @@ function Navbar() {
     return (
         <nav>
             <div className="navItem">
-                <NavLink to='/' className={getLinkStyle}>My Medicines</NavLink>
+                <NavLink to='/mymedicines' className={getLinkStyle}>My Medicines</NavLink>
             </div>
             <div className="navItem">
                 <NavLink to='/bookappointment' className={getLinkStyle}>Book an Appointment</NavLink>
@@ -19,9 +19,12 @@ function Navbar() {
             <div className="navItem">
                  <NavLink to='/myexercises' className={getLinkStyle}>My Exercises</NavLink>
             </div>
-
-
-
+            <div className="navItem">
+                 <NavLink to='/clients' className={getLinkStyle}>My Clients</NavLink>
+            </div>
+            <div className="navItem">
+                 <NavLink to='/favoriteexercises' className={getLinkStyle}>Favourited Exercises</NavLink>
+            </div>
         </nav>
     )
 }

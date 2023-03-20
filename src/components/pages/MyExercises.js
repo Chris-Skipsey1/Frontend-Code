@@ -1,23 +1,35 @@
 import useLoad from '../api/useLoad.js';
 import Card from '../UI/Card.js';
 import ExerciseCard from '../entities/medicines/ExerciseCard.js';
+import { createContext, useState } from "react";
+import API from '../api/API.js';
+
+const exerciseObject = {
+  ExerciseInfoID: 1006,
+  DateDone: "24/12/2023",
+  AmountCompleted: 5,
+  InfoExerciseID: 1003,
+  InfoClientID: 6,
+  Favourite: 0,
+  ExerciseName: "Lap around the house",
+  ExerciseDescription: "Walk around every corner of your home."
+}
 
 
-function MyExercises() {
+function MyExercises({ inititalExercise =  exerciseObject }) {
+
   // Initialisation
   const loggedInUserID = 6;
   const endpoint = `/exercises/clients/${loggedInUserID}`;
-
-  // useLoad
-
-
-  // State-----
-
+  const exercisesEndpoint = '/exercises';
   const [exercises, , loadingMessage,] = useLoad(endpoint);
 
-  //const handleSubmit = (appointment) => {}
-
-
+  const [isFavourite, isSetFavourite] = useState(false);
+  const handleFavourite = async (exercise) => {
+    const response = await API.put(`${exercisesEndpoint}/${exercise.ExerciseInfoID}`, exercise);
+    isSetFavourite(!isFavourite);
+    console.log(exercise.ExerciseInfoID)
+  }
 
   //View
   return (
@@ -33,13 +45,18 @@ function MyExercises() {
             ? <p>No exercises found</p>
             : <Card.Container>
               {
+                
                 exercises.map((exercise) =>
-                  <ExerciseCard key={exercises.ExerciseInfoID} exercise={exercise} />
-                )
+                  <Card key={exercise.ExerciseInfoID}>
+                    <ExerciseCard exercise={exercise} /> 
+                  <button className="secondButtonStuff" onClick={() => handleFavourite(exercise.ExerciseInfoID)}>
+                    {isFavourite ? 'Remove favourite' : 'Favourite this exercise'}</button>
+                  </Card>
+                  )
               }
             </Card.Container>
       }
-      
+    
     </section>
   );
 }

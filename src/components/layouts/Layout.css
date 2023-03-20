@@ -11,7 +11,7 @@ div#root {
   }
   
   div#root div.centrepane {
-    background: WhiteSmoke;
+    background: whitesmoke;
     width: 100%;
     /* max-width: 1000px; */
     display: grid;
