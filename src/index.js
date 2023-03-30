@@ -5,7 +5,6 @@ import { FavoritesContextProvider } from './components/entities/medicines/favour
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <FavoritesContextProvider>
+
     <App />
-  </FavoritesContextProvider>
 );
