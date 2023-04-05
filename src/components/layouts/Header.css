@@ -2,7 +2,6 @@ header {
     color: white;
     background: #25136b;
     display: flex;
-    
 }
 
 header a {
@@ -16,7 +15,7 @@ header a img {
 
 header a h1 {
     color: white;
-    margin-left: 10px;
+    margin-left: 15px;
     font-size: 200%;
 }
 

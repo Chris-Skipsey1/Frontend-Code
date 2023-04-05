@@ -32,8 +32,8 @@ function MyExercises() {
  
   const handleFavourite = async (exercise) => {
     //exerciseObject.Favourite = isFavourite;
-    const response = await API.put(`${exercisesEndpoint}/${exercise.ExerciseInfoID}`, exercise);
     exercise.Favourite = exercise.Favourite ? 0 : 1;
+    const response = await API.put(`${exercisesEndpoint}/${exercise.ExerciseInfoID}`, exercise);
 
 
 
@@ -59,11 +59,11 @@ function MyExercises() {
             : <Card.Container>
               {
                 
-                exercises.map((exercise) =>
+                exercises.map((exercise) => 
                   <Card key={exercise.ExerciseInfoID}>
                     <ExerciseCard exercise={exercise} /> 
                   <button className="secondButtonStuff" onClick={() => handleFavourite(exercise)}>
-                    {isFavourite ? 'Remove favourite' : 'Favourite this exercise'}</button>
+                    {exercise.Favourite ? 'Remove favourite' : 'Favourite this exercise'}</button>
                   </Card>
                   )
               }

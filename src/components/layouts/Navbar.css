@@ -1,17 +1,20 @@
 nav {
     display: flex;
     overflow: hidden;
-    background-color: #6599e7;
+    background-color: #25136b;
     text-align: center;
+    margin: auto;
 }
 
 nav div.navItem {
-    padding: 10px;
+    padding: 12px;
+    text-align: center;
 }
 
 nav div.navItem:hover {
     background-color: #547ab5;
-    text-shadow: black;
+    text-shadow: #6599e7;
+   
 }
 
 nav div.navItem a {
@@ -21,4 +24,7 @@ nav div.navItem a {
 
 div.navItem a.navSelected {
     color: black;
+    background-color: #547ab5;
+    padding: 12px;
+    
 }

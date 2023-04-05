@@ -32,11 +32,9 @@ function MyExercises() {
  
   const handleFavourite = async (exercise) => {
     //exerciseObject.Favourite = isFavourite;
-    const response = await API.put(`${exercisesEndpoint}/${exercise.ExerciseInfoID}`, exercise);
     exercise.Favourite = exercise.Favourite ? 0 : 1;
-
-
-
+    const response = await API.put(`${exercisesEndpoint}/${exercise.ExerciseInfoID}`, exercise);
+   
     console.log(exercise)
     //const endpoint1 = `${exercisesEndpoint}/${exercise.ExerciseInfoID}`
     //console.log(endpoint1)
@@ -44,43 +42,36 @@ function MyExercises() {
     isSetFavourite(!isFavourite);
     }
 
-
+    
   //View
   return (
     <section>
-      <h2>My Exercises</h2>
-      <p>On this page you will find the exercises that you have completed.</p>
-
+      <h2>Your favourited exercises</h2>
+      <p>On this page you will find the exercises that you have favourited.</p>
+      
       <div><br></br></div>
       {
         !exercises
           ? <p>{loadingMessage}</p>
-          : exercises.length === 0
+          : exercises.length === 0 
             ? <p>No exercises found</p>
             : <Card.Container>
-              {
+              {  
+                exercises.map((exercise) => exercise.Favourite    
+                  ? <Card key={exercise.ExerciseInfoID}>
+                      <ExerciseCard exercise={exercise} />
+                      <button className="secondButtonStuff" onClick={() => handleFavourite(exercise)}>
+                      {exercise.Favourite ? 'Remove favourite' : 'Favourite this exercise'}</button>
+                    </Card>
+                  : <p></p>
+                )
                 
-                exercises.map((exercise) => {
-                if (exercise.Favourite = 1)
-                {
-                  <Card key={exercise.ExerciseInfoID}>
-                    <ExerciseCard exercise={exercise} /> 
-                  <button className="secondButtonStuff" onClick={() => handleFavourite(exercise)}>
-                    {isFavourite ? 'Remove favourite' : 'Favourite this exercise'}</button>
-                    
-                  </Card>
-                } else {
-                  <p>hi</p>
-                }
-              }
-              )
-              }
-              
-              
-            </Card.Container>
+              } 
+              </Card.Container>   
       }
     
     </section>
   );
 }
+
 export default MyExercises;
