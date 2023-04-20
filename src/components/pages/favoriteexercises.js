@@ -18,7 +18,7 @@ const exerciseObject = {
 
 function MyExercises() {
   // Initialisation
-  const loggedInUserID = 6;
+  const loggedInUserID = 1;
   const endpoint = `/exercises/clients/${loggedInUserID}`;
   const exercisesEndpoint = '/exercises';
   const [exercises, , loadingMessage,] = useLoad(endpoint);
@@ -68,6 +68,7 @@ function MyExercises() {
                 
               } 
               </Card.Container>   
+              
       }
     
     </section>
