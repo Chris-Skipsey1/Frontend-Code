@@ -13,6 +13,7 @@ function MyMedicines() {
   return (
     <section>
       <h2>My Medicines</h2>
+      <p>Medicines that you need to take.</p>
       {
         !medicines
           ? <p>{loadingMessage}</p>

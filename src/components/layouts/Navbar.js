@@ -8,6 +8,9 @@ function Navbar() {
     return (
         <nav>
             <div className="navItem">
+                <NavLink to='/info' className={getLinkStyle}>Helpful Information</NavLink>
+            </div>
+            <div className="navItem">
                 <NavLink to='/mymedicines' className={getLinkStyle}>My Medicines</NavLink>
             </div>
             <div className="navItem">

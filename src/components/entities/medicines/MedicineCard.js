@@ -17,7 +17,15 @@ export default function MedicineCard({ medicine, onClick, isParentHovering = fal
         <Card  className={"Card" + (isParentHovering ? " Hovering" : "")} onClick={onClick}>
             
             <div className="MedicineCard">
-                {`For today, you need to take the following  Medicine Name: ${ medicine.MedicineName} Amount: ${medicine.PrescriptionDosage}`}    
+            {`For today, you need to take the following:`} 
+            <br></br>
+            <br></br>
+            {"Medicine Name:"}
+            <div className="centerIt"><div><h1>{`${ medicine.MedicineName}`}</h1></div></div>
+            {"Take at:"}
+            <div className="centerIt"><div><h1>{`${ medicine.MedicineTakenDate}`}</h1></div></div>
+            {"Amount to take in grams (g):"}
+            <div className="centerIt"><div><h1>{`Amount: ${medicine.PrescriptionDosage}`}</h1></div></div>        
             </div>
         </Card>
     );

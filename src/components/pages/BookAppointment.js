@@ -14,7 +14,9 @@ function BookAppointment() {
   //View
   return (
     <div>
-
+      <h2>Book an Appointment</h2>
+      <p>Fill out the details to make an appointment.</p>
+      <br></br>
       <AppointmentForm onSubmit={handleSubmit}/>
       
       

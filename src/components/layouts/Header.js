@@ -8,10 +8,10 @@ function Header() {
                 <img src="https://img.icons8.com/pastel-glyph/60/hospital--v1.png" alt="person" />
             </Link>
             <Link to="/mymedicines">
-                <h1>Improve your Health!</h1>
+                <h1>Improve your Health</h1>
             </Link>
             <div className="login">
-                <p>Welcome Chris to the platform</p>
+                <p>Welcome the platform</p>
             </div>
         </header>
     )

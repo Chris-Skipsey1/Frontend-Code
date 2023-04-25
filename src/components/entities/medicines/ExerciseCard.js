@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../UI/Card.js';
-import FavoritesContext from './favourites.js';
 import './MedicineCard.css';
 import MyExercises from '../../pages/MyExercises.js';
 

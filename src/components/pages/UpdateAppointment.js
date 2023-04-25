@@ -26,7 +26,9 @@ function UpdateAppointment() {
   //View
   return (
     <div>
-
+      <h2>Update your Appointment</h2>
+      <p>Fill out the details to make update your appointment.</p>
+      <br></br>
       <UpdateAppointmentForm onSubmit={handleSubmit} initialAppointment={appointment}/>
       
       

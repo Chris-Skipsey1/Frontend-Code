@@ -68,7 +68,7 @@ function ListAppointments() {
   return (
     <section>
       <h2>My Appointments</h2>
-      <p>Hi there {loggedInUserID}</p>
+      <p>Your booked appointments.</p>
       {
         !appointments
           ? <p>{loadingMessage}</p>

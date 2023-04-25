@@ -48,7 +48,7 @@ function MyExercises() {
   return (
     <section>
       <h2>My Exercises</h2>
-      <p>On this page you will find the exercises that you have completed.</p>
+      <p>Exercises that you have completed.</p>
 
       <div><br></br></div>
       {

@@ -28,17 +28,10 @@ function MyExercises() {
   //const [clientFavourites, setClientFavorites] = useState([]);
   
   const [isFavourite, isSetFavourite] = useState();
-
- 
   const handleFavourite = async (exercise) => {
     //exerciseObject.Favourite = isFavourite;
     exercise.Favourite = exercise.Favourite ? 0 : 1;
     const response = await API.put(`${exercisesEndpoint}/${exercise.ExerciseInfoID}`, exercise);
-   
-    console.log(exercise)
-    //const endpoint1 = `${exercisesEndpoint}/${exercise.ExerciseInfoID}`
-    //console.log(endpoint1)
-    //console.log(JSON.stringify(exercise))
     isSetFavourite(!isFavourite);
     }
 
@@ -46,8 +39,8 @@ function MyExercises() {
   //View
   return (
     <section>
-      <h2>Your favourited exercises</h2>
-      <p>On this page you will find the exercises that you have favourited.</p>
+      <h2>My favourited exercises</h2>
+      <p>Exercises that you have favourited.</p>
       
       <div><br></br></div>
       {

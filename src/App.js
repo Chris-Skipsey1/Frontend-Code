@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MyMedicines from './components/pages/MyMedicines';
+import Info from './components/pages/Info';
 import BookAppointment from './components/pages/BookAppointment';
 import ListAppointments from './components/pages/ListAppointments';
 import UpdateAppointment from './components/pages/UpdateAppointment';
@@ -18,6 +19,7 @@ function App() {
       <Layout>
         <Routes>
           <Route exact path='/mymedicines' element={<MyMedicines />} />
+          <Route path='/info' element={<Info />} />
           <Route path='/bookappointment' element={<BookAppointment />} />
           <Route path='/listappointments' element={<ListAppointments />} />
           <Route path='/updateappointment' element={<UpdateAppointment />} />

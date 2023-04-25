@@ -22,7 +22,7 @@ function MyClients() {
   return (
     <section>
       <h2>My Clients</h2>
-      <p>On this page you will clients.</p>
+      <p>Your clients.</p>
 
       <div><br></br></div>
       {
