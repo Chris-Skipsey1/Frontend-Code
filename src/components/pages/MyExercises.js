@@ -1,7 +1,7 @@
 import useLoad from '../api/useLoad.js';
 import Card from '../UI/Card.js';
 import ExerciseCard from '../entities/medicines/ExerciseCard.js';
-import { useContext, useState } from "react";
+import { useState } from "react";
 import API from '../api/API.js';
 
 const exerciseObject = {
@@ -62,8 +62,8 @@ function MyExercises() {
                 exercises.map((exercise) => 
                   <Card key={exercise.ExerciseInfoID}>
                     <ExerciseCard exercise={exercise} /> 
-                  <button className="secondButtonStuff" onClick={() => handleFavourite(exercise)}>
-                    {exercise.Favourite ? 'Remove favourite' : 'Favourite this exercise'}</button>
+                    <button className="secondButtonStuff" style={{background: exercise.Favourite ? "red" : "green"}} onClick={() => handleFavourite(exercise)}>
+                    {exercise.Favourite ? 'Remove exercise as completed today' : 'Mark exercise as completed today'}</button>
                   </Card>
                   )
               }

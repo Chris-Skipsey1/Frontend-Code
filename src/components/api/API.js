@@ -17,7 +17,7 @@ const callFetch = async (endpoint, method, dataObj) => {
     };
 
 
-    //Call the fetch and process the return
+    // Call the fetch and process the return
     try {
         const endpointAddress = API_URL + endpoint;
         const response = await fetch(endpointAddress, requestObj);

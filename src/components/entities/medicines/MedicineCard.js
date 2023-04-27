@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Card from '../../UI/Card.js';
-import './MedicineCard.css';
+import './NewMedicineCard.css';
 
 Card.propTypes = {
     onClick: PropTypes.func,
@@ -16,20 +16,26 @@ export default function MedicineCard({ medicine, onClick, isParentHovering = fal
     return (
         <Card  className={"Card" + (isParentHovering ? " Hovering" : "")} onClick={onClick}>
             
-            <div className="MedicineCard">
-            {`For today, you need to take the following:`} 
+            <div className="TheCard">
+            <div className="BoxStyle"><div><h1><img src={`${ medicine.MedicineURI}`} width="200" height="170"/></h1></div></div>
+            <br></br>
+            <h1>{`Medicine Details`} </h1>
+           
+            <div>{`Medicine Name: ${medicine.MedicineName}`}</div>
+            <div>{`Medicine Description: ${medicine.MedicineDescription}`}</div>
+            <div>{`Take at: ${ medicine.MedicineTakenDate}`}</div>
+            {"Amount to take (mg):"}
             <br></br>
             <br></br>
-            {"Medicine Name:"}
-            <div className="centerIt"><div><h1>{`${ medicine.MedicineName}`}</h1></div></div>
-            {"Take at:"}
-            <div className="centerIt"><div><h1>{`${ medicine.MedicineTakenDate}`}</h1></div></div>
-            {"Amount to take in grams (g):"}
-            <div className="centerIt"><div><h1>{`Amount: ${medicine.PrescriptionDosage}`}</h1></div></div>        
+            <div className="centerIt"><div><h1>{`${medicine.PrescriptionDosage} mg`}</h1></div></div>   
+             
+
+              
             </div>
         </Card>
     );
 }
+//<img className='' src=${exercise.Image}  
 
 Container.propTypes = {
     className: PropTypes.string

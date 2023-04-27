@@ -53,8 +53,8 @@ function MyExercises() {
                 exercises.map((exercise) => exercise.Favourite    
                   ? <Card key={exercise.ExerciseInfoID}>
                       <ExerciseCard exercise={exercise} />
-                      <button className="secondButtonStuff" onClick={() => handleFavourite(exercise)}>
-                      {exercise.Favourite ? 'Remove favourite' : 'Favourite this exercise'}</button>
+                      <button className="secondButtonStuff" style={{background: exercise.Favourite ? "red" : "green"}} onClick={() => handleFavourite(exercise)}>
+                      {exercise.Favourite ? 'Remove exercise as completed today' : 'Mark exercise as completed today'}</button>
                     </Card>
                   : <p></p>
                 )
@@ -65,6 +65,7 @@ function MyExercises() {
       }
     
     </section>
+    
   );
 }
 

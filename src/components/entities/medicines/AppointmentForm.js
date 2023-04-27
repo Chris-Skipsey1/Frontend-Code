@@ -9,8 +9,6 @@ const emptyAppointment = {
     AppointmentClientID: 50
 }
 
-
-
 export default function AppointmentForm({ onSubmit, initialAppointment = emptyAppointment }) {
     //const appointmentsEndpoint = '/appointments';
     console.log(JSON.stringify(initialAppointment));
@@ -104,7 +102,9 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
                 advice="Write something to your trainer. This could be any details you would like to let the trainer know*" // Top advice
                 error={errors.AppointmentDescription}
             >
-                <input
+                <textarea
+                    cols = "100"
+                    rows = "8"
                     type="text"
                     name="AppointmentDescription"
                     value={appointment.AppointmentDescription}

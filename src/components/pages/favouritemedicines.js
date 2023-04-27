@@ -34,8 +34,8 @@ function MyMedicines() {
 
   return (
     <section>
-      <h2>My Medicines</h2>
-      <p>Medicines that you need to take.</p>
+      <h2>My Favourited Medicines</h2>
+      <p>Medicines that you have favourited.</p>
       {
         !medicines
           ? <p>{loadingMessage}</p>
@@ -43,12 +43,13 @@ function MyMedicines() {
             ? <p>No medicines found</p>
             : <Card.Container>
               {
-                medicines.map((medicine) =>
-                <Card key={medicine.MedicineID}>
+                medicines.map((medicine) => medicine.MedicineFavourite 
+                ? <Card key={medicine.MedicineID}>
                   <MedicineCard  medicine={medicine} />
                   <button className="secondButtonStuff" style={{background: medicine.MedicineFavourite ? "red" : "green"}} onClick={() => handleMedicine(medicine)}>
                     {medicine.MedicineFavourite ? 'Remove medicine from taken today' : 'I have taken this medicine today'}</button>
                   </Card>
+                  : <p></p>
                 )
               }
             </Card.Container>

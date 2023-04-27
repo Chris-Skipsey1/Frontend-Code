@@ -7,6 +7,7 @@ import UpdateAppointment from './components/pages/UpdateAppointment';
 import MyExercises from './components/pages/MyExercises';
 import Client from './components/pages/Client';
 import FavoriteExercisesPage from './components/pages/favoriteexercises';
+import FavoriteMedicinePage from './components/pages/favouritemedicines';
 import PageNotFound from './components/pages/404';
 import Layout from './components/layouts/Layout';
 
@@ -26,6 +27,7 @@ function App() {
           <Route path='/myexercises' element={<MyExercises />} />
           <Route path='/clients' element={<Client />} />
           <Route path='/favoriteexercises' element={<FavoriteExercisesPage />} />
+          <Route path='/favoritemedicines' element={<FavoriteMedicinePage />} />
           <Route path='*' element={<PageNotFound />} />
             
 

@@ -26,7 +26,10 @@ function Navbar() {
                  <NavLink to='/clients' className={getLinkStyle}>My Clients</NavLink>
             </div>
             <div className="navItem">
-                 <NavLink to='/favoriteexercises' className={getLinkStyle}>Favourited Exercises</NavLink>
+                 <NavLink to='/favoriteexercises' className={getLinkStyle}>Completed Exercises</NavLink>
+            </div>
+            <div className="navItem">
+                 <NavLink to='/favoritemedicines' className={getLinkStyle}>Medicines taken today</NavLink>
             </div>
         </nav>
     )

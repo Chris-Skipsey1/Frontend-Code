@@ -20,8 +20,6 @@ export default function ExerciseCard({ exercise, onClick, isParentHovering = fal
     // Methods -------------------------------------
     // View ----------------------------------------
 
-
-    
     return (
         <Card  className={"Card" + (isParentHovering ? " Hovering" : "") } onClick={onClick}>
              
@@ -34,11 +32,12 @@ export default function ExerciseCard({ exercise, onClick, isParentHovering = fal
                 <div>{`Last date completed: ${exercise.DateDone}`}</div> 
                 <div>{`Times completed: ${exercise.AmountCompleted}`} </div>
                 
+                
             </div>
         </Card>
     );
 }
-
+//<img className='' src=${exercise.Image} 
 Container.propTypes = {
     className: PropTypes.string
 };

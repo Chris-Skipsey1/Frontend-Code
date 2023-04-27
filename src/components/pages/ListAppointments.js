@@ -82,7 +82,7 @@ function ListAppointments() {
                 appointments.map((appointment) =>
                   <Card key={appointment.AppointmentID}><AppointmentCard appointment={appointment} />
                   <button className="secondButtonStuff" onClick={() => appointmentUpdate(appointment)}>Edit Appointment</button>
-                  <button className="secondButtonStuff" onClick={() => [appointmentDelete(appointment.AppointmentID), popup()]}>Cancel Appointment</button>
+                  <button className="thirdButtonStuff" onClick={() => [appointmentDelete(appointment.AppointmentID), popup()]}>Cancel Appointment</button>
                   </Card>
                   
                    //On click 

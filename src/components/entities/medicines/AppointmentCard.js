@@ -2,19 +2,12 @@ import PropTypes from 'prop-types';
 import Card from '../../UI/Card.js';
 import './MedicineCard.css';
 
-
-
 Card.propTypes = {
     onClick: PropTypes.func,
     isParentHovering: PropTypes.bool
 };
-//<p>Note: Pressing the cancel button will cancel the appointment. You cannot undo this action.</p>
 export default function AppointmentCard({ appointment, onClick, isParentHovering = false }) {
-    // Properties ----------------------------------
-    // Hooks ---------------------------------------
-    // Context -------------------------------------
-    // Methods -------------------------------------
-    // View ----------------------------------------
+    // Card component holding values from the DB
     return (
         <Card  className={"Card" + (isParentHovering ? " Hovering" : "") } onClick={onClick}>
              
@@ -29,10 +22,7 @@ export default function AppointmentCard({ appointment, onClick, isParentHovering
                 <br></br>
                 <br></br>
                 <br></br>
-                
-                
             </div>
-            
         </Card>
     );
 }

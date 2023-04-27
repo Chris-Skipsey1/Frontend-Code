@@ -4,6 +4,9 @@ nav {
     background-color: #25136b;
     text-align: center;
     margin: auto;
+    -webkit-box-shadow: 1px 8px 26px 2px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 8px 26px 2px rgba(0,0,0,0.75);
+box-shadow: 1px 8px 26px 2px rgba(0,0,0,0.75);
 }
 
 nav div.navItem {
@@ -14,7 +17,9 @@ nav div.navItem {
 nav div.navItem:hover {
     background-color: #547ab5;
     text-shadow: #6599e7;
-   
+    -webkit-box-shadow: 3px 3px 19px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 3px 19px 1px rgba(0,0,0,0.75);
+    box-shadow: 3px 3px 19px 1px rgba(0,0,0,0.75);
 }
 
 nav div.navItem a {
@@ -26,5 +31,6 @@ div.navItem a.navSelected {
     color: black;
     background-color: #547ab5;
     padding: 12px;
+    
     
 }
