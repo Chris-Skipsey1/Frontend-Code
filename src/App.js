@@ -13,7 +13,7 @@ import Layout from './components/layouts/Layout';
 
 import './App.css';
 
-
+// Pages
 function App() {
   return (
     <BrowserRouter>
@@ -29,8 +29,6 @@ function App() {
           <Route path='/favoriteexercises' element={<FavoriteExercisesPage />} />
           <Route path='/favoritemedicines' element={<FavoriteMedicinePage />} />
           <Route path='*' element={<PageNotFound />} />
-            
-
         </Routes>
       </Layout>
       
@@ -38,5 +36,4 @@ function App() {
 
   );
 }
-
 export default App;

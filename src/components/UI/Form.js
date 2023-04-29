@@ -1,18 +1,13 @@
 import { useState } from 'react';
 import './Form.scss';
 
-export default function Form({children}) {
-    // Initialisation
-    // Hooks
-    // State
-    // Context
-    // Handlers
-    // View
+export default function Form({ children }) {
+
     return (
         <borderlayout className="BorderedForm">
             <div className="FormTray">
                 {
-                children
+                    children
                 }
             </div>
 
@@ -22,12 +17,7 @@ export default function Form({children}) {
 
 
 function Item({ children, label, htmlFor, advice, error }) {
-    // Initialisation
-    // Hooks
-    // State
-    // Context
-    // Handlers
-    // View
+
     return (
         <div className="FormItem">
             <label className="FormLabel" htmlFor={htmlFor}>{label}</label>
@@ -42,7 +32,7 @@ function Item({ children, label, htmlFor, advice, error }) {
     );
 }
 
-function useForm(initialRecord, conformance, {isValid, errorMessage}, onSubmit) {
+function useForm(initialRecord, conformance, { isValid, errorMessage }, onSubmit) {
     // Initialisation
     // Hooks
     // State
@@ -76,16 +66,14 @@ function useForm(initialRecord, conformance, {isValid, errorMessage}, onSubmit) 
     const handleSubmit = () => {
         onSubmit(record);
         isValidRecord(record);
-        setErrors({...errors});
-        
+        setErrors({ ...errors });
+
     }
 
     // View
     return [record, setRecord, errors, handleChange2, handleSubmit];
-        
-    
+
 }
 
-// Compose Form Object
 Form.Item = Item;
 Form.useForm = useForm;

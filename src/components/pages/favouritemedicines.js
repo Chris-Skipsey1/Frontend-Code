@@ -5,12 +5,12 @@ import { useState } from "react";
 import API from '../api/API.js';
 
 const medicineObject = {
-    MedicineID: 5,
-    MedicineName: "Fosamax",
-    MedicineDescription: "Helps to treat and prevent bone disease.",
-    MedicineTakenDate: "04/05/2023",
-    MedicineURI: "https://i.imgur.com/gyUHd2X.jpeg",
-    PrescriptionDosage: 84
+  MedicineID: 5,
+  MedicineName: "Fosamax",
+  MedicineDescription: "Helps to treat and prevent bone disease.",
+  MedicineTakenDate: "04/05/2023",
+  MedicineURI: "https://i.imgur.com/gyUHd2X.jpeg",
+  PrescriptionDosage: 84
 }
 
 function MyMedicines() {
@@ -28,14 +28,14 @@ function MyMedicines() {
     const response = await API.put(`${medicinesEndpoint}/${medicine.MedicineID}`, medicine);
     console.log(medicine)
     isSetFavourite(!isFavourite);
-    }
+  }
 
 
 
   return (
     <section>
-      <h2>My Favourited Medicines</h2>
-      <p>Medicines that you have favourited.</p>
+      <h2>My Medicines taken today</h2>
+      <p>Medicines that you have taken today. If the page is blank, then you have taken no medicines today. </p>
       {
         !medicines
           ? <p>{loadingMessage}</p>
@@ -43,11 +43,11 @@ function MyMedicines() {
             ? <p>No medicines found</p>
             : <Card.Container>
               {
-                medicines.map((medicine) => medicine.MedicineFavourite 
-                ? <Card key={medicine.MedicineID}>
-                  <MedicineCard  medicine={medicine} />
-                  <button className="secondButtonStuff" style={{background: medicine.MedicineFavourite ? "red" : "green"}} onClick={() => handleMedicine(medicine)}>
-                    {medicine.MedicineFavourite ? 'Remove medicine from taken today' : 'I have taken this medicine today'}</button>
+                medicines.map((medicine) => medicine.MedicineFavourite
+                  ? <Card key={medicine.MedicineID}>
+                    <MedicineCard medicine={medicine} />
+                    <center><button className="secondButtonStuff" style={{ background: medicine.MedicineFavourite ? "red" : "green" }} onClick={() => handleMedicine(medicine)}>
+                      {medicine.MedicineFavourite ? 'Remove medicine as taken' : 'I have taken this medicine today'}</button></center>
                   </Card>
                   : <p></p>
                 )

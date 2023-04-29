@@ -1,10 +1,6 @@
-import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../UI/Card.js';
 import './MedicineCard.css';
-import MyExercises from '../../pages/MyExercises.js';
-
-
 
 Card.propTypes = {
     onClick: PropTypes.func,
@@ -14,25 +10,20 @@ Card.propTypes = {
 //<button onClick={toggleFavoritiesButton}>{itemIsFavorite ? 'Remove from Favourites' : 'Add to Favourites'}</button>
 
 export default function ExerciseCard({ exercise, onClick, isParentHovering = false }) {
-    // Properties ----------------------------------
-    // Hooks ---------------------------------------
-    // Context -------------------------------------
-    // Methods -------------------------------------
-    // View ----------------------------------------
 
     return (
-        <Card  className={"Card" + (isParentHovering ? " Hovering" : "") } onClick={onClick}>
-             
+        <Card className={"Card" + (isParentHovering ? " Hovering" : "")} onClick={onClick}>
+
             <div className="MedicineCard">
                 <div className="centerIt"><div><h1>{exercise.ExerciseName}</h1></div>{`Total times completed: ${exercise.AmountCompleted} `}</div>
                 <div><br></br></div>
-                <div><h3>Detailed Information</h3></div>
-                <div>{`Exercise name: ${exercise.ExerciseName}`} </div>
-                <div>{`Description: ${exercise.ExerciseDescription}`}    </div>
-                <div>{`Last date completed: ${exercise.DateDone}`}</div> 
-                <div>{`Times completed: ${exercise.AmountCompleted}`} </div>
-                
-                
+                <center><div><h3>Detailed Information</h3></div></center>
+                <div><b>{`Exercise name:`}</b> {`${exercise.ExerciseName}`} </div>
+                <div><b>{`Description:`}</b> {`${exercise.ExerciseDescription}`}    </div>
+                <div><b>{`Last date completed:`}</b> {`${exercise.DateDone}`}</div>
+                <div><b>{`Times completed:`}</b> {`${exercise.AmountCompleted}`} </div>
+
+
             </div>
         </Card>
     );
@@ -49,9 +40,5 @@ function Container({ children, className = "" }) {
         </div>
     );
 }
-
-// -----------------------------------------
-// Compose Card Object /////////////////////
-// -----------------------------------------
 
 Card.Container = Container;

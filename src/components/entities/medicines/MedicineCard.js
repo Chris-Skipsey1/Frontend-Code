@@ -8,29 +8,24 @@ Card.propTypes = {
 };
 
 export default function MedicineCard({ medicine, onClick, isParentHovering = false }) {
-    // Properties ----------------------------------
-    // Hooks ---------------------------------------
-    // Context -------------------------------------
-    // Methods -------------------------------------
-    // View ----------------------------------------
-    return (
-        <Card  className={"Card" + (isParentHovering ? " Hovering" : "")} onClick={onClick}>
-            
-            <div className="TheCard">
-            <div className="BoxStyle"><div><h1><img src={`${ medicine.MedicineURI}`} width="200" height="170"/></h1></div></div>
-            <br></br>
-            <h1>{`Medicine Details`} </h1>
-           
-            <div>{`Medicine Name: ${medicine.MedicineName}`}</div>
-            <div>{`Medicine Description: ${medicine.MedicineDescription}`}</div>
-            <div>{`Take at: ${ medicine.MedicineTakenDate}`}</div>
-            {"Amount to take (mg):"}
-            <br></br>
-            <br></br>
-            <div className="centerIt"><div><h1>{`${medicine.PrescriptionDosage} mg`}</h1></div></div>   
-             
 
-              
+    return (
+        <Card className={"Card" + (isParentHovering ? " Hovering" : "")} onClick={onClick}>
+
+            <div className="TheCard">
+                <div className="BoxStyle"><div><h1><img src={`${medicine.MedicineURI}`} alt="A medicine" width="200" height="170" /></h1></div></div>
+                <br></br>
+                <center><h3>{`Medicine Details`} </h3></center>
+
+                <div><b>{`Medicine Name:`}</b> {`${medicine.MedicineName}`}</div>
+                <div><b>{`Medicine Description:`}</b> {`${medicine.MedicineDescription}`}</div>
+                <b>{`Amount to take (mg):`}</b> {`${medicine.PrescriptionDosage}`}
+                <br></br>
+                <br></br>
+                <div className="centerIt"><div><p>{medicine.MedicineTakenDate}</p></div></div>
+
+
+
             </div>
         </Card>
     );
@@ -48,9 +43,5 @@ function Container({ children, className = "" }) {
         </div>
     );
 }
-
-// -----------------------------------------
-// Compose Card Object /////////////////////
-// -----------------------------------------
 
 Card.Container = Container;

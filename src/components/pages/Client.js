@@ -8,16 +8,10 @@ function MyClients() {
   const endpoint = `/clients`;
 
   // useLoad
-
-
   // State-----
-
   const [clients, , loadingMessage,] = useLoad(endpoint);
 
   //const handleSubmit = (appointment) => {}
-
-
-
   //View
   return (
     <section>
@@ -38,7 +32,7 @@ function MyClients() {
               }
             </Card.Container>
       }
-      
+
     </section>
   );
 }

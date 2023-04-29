@@ -14,16 +14,16 @@ function ListAppointments() {
   const endpoint = `/appointments/clients/${loggedInUserID}`;
   const deleteAppointmentsEndpoint = 'appointments';
   const navigate = useNavigate();
-  const { state} = useLocation();
+  const { state } = useLocation();
   //const [openModal, setOpenModal] = useState(false);
-  
+
 
   // useLoad
 
 
   // State-----
 
-  const [appointments, setAppointments , loadingMessage,] = useLoad(endpoint);
+  const [appointments, setAppointments, loadingMessage,] = useLoad(endpoint);
 
   //const handleSubmit = (appointment) => {}
 
@@ -41,12 +41,12 @@ function ListAppointments() {
   const appointmentDelete = async (id) => {
     let appointmentsCopy = [...appointments];
     const response = await API.delete(`/${deleteAppointmentsEndpoint}/${id}`);
-    if ( response.isSuccess ) {
+    if (response.isSuccess) {
     }
-    for ( let i=0; i<appointmentsCopy.length; i++ ) {
-      if (appointmentsCopy[i].AppointmentID === id ) {
-        let appointmentsCopy1 = appointmentsCopy.splice(0,i);
-        let appointmentsCopy2 = appointmentsCopy.splice(i+1, appointmentsCopy.length);
+    for (let i = 0; i < appointmentsCopy.length; i++) {
+      if (appointmentsCopy[i].AppointmentID === id) {
+        let appointmentsCopy1 = appointmentsCopy.splice(0, i);
+        let appointmentsCopy2 = appointmentsCopy.splice(i + 1, appointmentsCopy.length);
         appointmentsCopy = appointmentsCopy1.concat(appointmentsCopy2);
         //appointmentsCopy.drop(i);
       }
@@ -56,13 +56,13 @@ function ListAppointments() {
 
   function popup() {
     alert("Your appointment has been cancelled.");
-}
+  }
 
 
 
- //<button className="secondButtonStuff" onClick={() => appointmentDelete(appointment.AppointmentID)}>Cancel Appointment</button>
- //<button className="secondButtonStuff" onClick={() => {setOpenModal(true)}}>Cancel Appointment</button>
-//<div>{openModal && <Modal closeModal={setOpenModal}/>}</div>
+  //<button className="secondButtonStuff" onClick={() => appointmentDelete(appointment.AppointmentID)}>Cancel Appointment</button>
+  //<button className="secondButtonStuff" onClick={() => {setOpenModal(true)}}>Cancel Appointment</button>
+  //<div>{openModal && <Modal closeModal={setOpenModal}/>}</div>
 
   //View
   return (
@@ -75,23 +75,23 @@ function ListAppointments() {
           : appointments.length === 0
             ? <p>No medicines found</p>
             : <Card.Container>
-              
-                
+
+
               {
-                
+
                 appointments.map((appointment) =>
                   <Card key={appointment.AppointmentID}><AppointmentCard appointment={appointment} />
-                  <button className="secondButtonStuff" onClick={() => appointmentUpdate(appointment)}>Edit Appointment</button>
-                  <button className="thirdButtonStuff" onClick={() => [appointmentDelete(appointment.AppointmentID), popup()]}>Cancel Appointment</button>
+                    <center><button className="secondButtonStuff" onClick={() => appointmentUpdate(appointment)}>Edit Appointment</button>
+                      <button className="thirdButtonStuff" onClick={() => [appointmentDelete(appointment.AppointmentID), popup()]}>Cancel Appointment</button></center>
                   </Card>
-                  
-                   //On click 
+
+                  //On click 
                 )
               }
-             
+
             </Card.Container>
       }
-      
+
     </section>
   );
 }

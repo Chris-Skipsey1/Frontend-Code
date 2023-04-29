@@ -1,50 +1,26 @@
-// -----------------------------------------------
-// Styling ///////////////////////////////////////
-// -----------------------------------------------
-
-$Red: #edafb8; // Rose
-$DarkRed: darken($Red, 20%);
-$Green: #29e7cd; // Cyan
-$DarkGreen: darken($Green, 10%);
-$BorderGrey: LightGrey;
-
 .borderlayout {
   width: 100%;
-  padding: 10px 0; 
-  
-
-  &.BorderedForm {
-    margin: 10px 0;
-    padding: 20px;
-    border: 1px solid $BorderGrey;
-    border-radius: 5px;
-  }
+  padding: 10px 0;
 
   div.FormTray {
     width: 100%;
     margin-bottom: 20px;
-   
-
   }
-
- 
 }
 
 div.FormItem {
-
   margin-bottom: 20px;
-  
   label.FormLabel {
     display: block;
     font-weight: 600;
   }
 
   p.FormAdvice {
-    color: $DarkGreen; 
+    color: green;
     font-weight: 400;
     font-size: 90%;
   }
-  
+
   select,
   input {
     width: 100%;
@@ -52,7 +28,7 @@ div.FormItem {
     margin: 1px 0;
     font-size: 100%;
     border-radius: 0px;
-    border: 1px solid $BorderGrey;
+    border: 1px solid grey;
     background: White;
 
     &::placeholder,
@@ -67,42 +43,45 @@ div.FormItem {
       outline-color: red;
       outline-style: solid;
       border-width: 1px;
-      border-style: solid;;
+      border-style: solid;
     }
-    &:hover { 
-      border-color: $BorderGrey; 
-      outline-color: $BorderGrey; 
+    &:hover {
+      border-color: grey;
+      outline-color: grey;
     }
-    &:focus { 
-      border-color: $DarkGreen; 
-      outline-color: $DarkGreen; 
+    &:focus {
+      border-color: darkgreen;
+      outline-color: darkgreen;
     }
 
-    &[type="number"] { text-align: left; }
+    &[type="number"] {
+      text-align: left;
+    }
 
     &.FormError {
-      border-color: $DarkRed;
-      outline-color: $DarkRed;
+      border-color: darkred;
+      outline-color: darkred;
     }
   }
 
   p.FormError {
-    color: $DarkRed; 
+    color: darkred;
     font-weight: 400;
     font-size: 90%;
   }
 }
+
 .buttonStuff {
   background-color: green;
   border-color: black;
   padding: 10px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
-  font-weight : bold;
+  font-weight: bold;
   font-size: 40px;
 }
 .buttonStuff:hover {
-  background-color: #4CAF50; /* Green */
+  background-color: #4caf50; /* Green */
   color: white;
 }
 
@@ -110,13 +89,13 @@ div.FormItem {
   background-color: green;
   border-color: black;
   padding: 5px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
-  font-weight : bold;
+  font-weight: bold;
   font-size: 16.5px;
 }
 .secondButtonStuff:hover {
-  background-color: #4CAF50; /* Green */
+  background-color: #4caf50; /* Green */
   color: white;
 }
 
@@ -124,12 +103,22 @@ div.FormItem {
   background-color: red;
   border-color: black;
   padding: 5px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
-  font-weight : bold;
+  font-weight: bold;
   font-size: 16.5px;
 }
 .thirdButtonStuff:hover {
   background-color: rgb(235, 91, 91); /* Green */
   color: white;
+}
+
+.FormBox {
+  width: 70%;
+  margin: auto;
+  border: 1px solid #d1caca;
+  background-color: #ffffff;
+  padding: 30px;
+  box-shadow: 3px 3px 8px #888888;
+  border-radius: 4px;
 }

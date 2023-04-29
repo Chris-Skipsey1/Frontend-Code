@@ -5,12 +5,12 @@ import { useState } from "react";
 import API from '../api/API.js';
 
 const medicineObject = {
-    MedicineID: 5,
-    MedicineName: "Fosamax",
-    MedicineDescription: "Helps to treat and prevent bone disease.",
-    MedicineTakenDate: "04/05/2023",
-    MedicineURI: "https://i.imgur.com/gyUHd2X.jpeg",
-    PrescriptionDosage: 84
+  MedicineID: 5,
+  MedicineName: "Fosamax",
+  MedicineDescription: "Helps to treat and prevent bone disease.",
+  MedicineTakenDate: "04/05/2023",
+  MedicineURI: "https://i.imgur.com/gyUHd2X.jpeg",
+  PrescriptionDosage: 84
 }
 
 function MyMedicines() {
@@ -28,7 +28,7 @@ function MyMedicines() {
     const response = await API.put(`${medicinesEndpoint}/${medicine.MedicineID}`, medicine);
     console.log(medicine)
     isSetFavourite(!isFavourite);
-    }
+  }
 
 
 
@@ -44,10 +44,10 @@ function MyMedicines() {
             : <Card.Container>
               {
                 medicines.map((medicine) =>
-                <Card key={medicine.MedicineID}>
-                  <MedicineCard  medicine={medicine} />
-                  <button className="secondButtonStuff" style={{background: medicine.MedicineFavourite ? "red" : "green"}} onClick={() => handleMedicine(medicine)}>
-                    {medicine.MedicineFavourite ? 'Remove medicine from taken today' : 'I have taken this medicine today'}</button>
+                  <Card key={medicine.MedicineID}>
+                    <MedicineCard medicine={medicine} />
+                    <center><button className="secondButtonStuff" style={{ background: medicine.MedicineFavourite ? "red" : "green" }} onClick={() => handleMedicine(medicine)}>
+                      {medicine.MedicineFavourite ? 'Remove medicine as taken' : 'I have taken this medicine today'}</button></center>
                   </Card>
                 )
               }

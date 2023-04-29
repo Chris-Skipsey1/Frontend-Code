@@ -9,16 +9,17 @@ Card.propTypes = {
 export default function AppointmentCard({ appointment, onClick, isParentHovering = false }) {
     // Card component holding values from the DB
     return (
-        <Card  className={"Card" + (isParentHovering ? " Hovering" : "") } onClick={onClick}>
-             
+        <Card className={"Card" + (isParentHovering ? " Hovering" : "")} onClick={onClick}>
+
             <div className="MedicineCard">
                 <div className="centerIt">{`Your next appointment is ${appointment.DateAndTime} `}</div>
                 <div><br></br></div>
-                <div>{`Appointment ID: ${appointment.AppointmentID}`}</div>
-                <div>{`Description: ${appointment.AppointmentDescription}`}</div> 
-                <div>{`Your name: ${appointment.ClientName}`} </div>
-                <div>{`Personal Trainer's name: ${appointment.PersonalTrainerName}`} </div>
-                <div>{`Appointment date: ${appointment.DateAndTime}`}    </div>
+                <center><div><h3>Appointment Details</h3></div></center>
+                <div><b>{`Appointment ID:`}</b> {`${appointment.AppointmentID}`}</div>
+                <div><b>{`Description:`}</b> {`${appointment.AppointmentDescription}`}</div>
+                <div><b>{`Your name:`}</b> {`${appointment.ClientName}`} </div>
+                <div><b>{`Personal Trainer's name:`}</b> {`${appointment.PersonalTrainerName}`} </div>
+                <div><b>{`Appointment date:`}</b> {`${appointment.DateAndTime}`}    </div>
                 <br></br>
                 <br></br>
                 <br></br>
@@ -38,9 +39,5 @@ function Container({ children, className = "" }) {
         </div>
     );
 }
-
-// -----------------------------------------
-// Compose Card Object /////////////////////
-// -----------------------------------------
 
 Card.Container = Container;

@@ -1,21 +1,19 @@
 .MedicineCard {
-    width: 350px;
-    height: 400px;
-    padding: 10px;
-    
+  width: 350px;
+  height: 400px;
+  padding: 10px;
 }
 
 .MedicineCard:hover {
-    box-shadow: 5px 5px 8px #888888;
-  }
-
-.centerIt {
-text-align: center;
-margin: auto;
-font-weight: bold;
-width: 50%;
-border: 3px solid #25136b;
-padding: 10px;
-box-shadow: 3px 3px 8px #888888;
+  box-shadow: 3px -4px 15px 0px rgba(0, 0, 0, 0.3);
 }
 
+.centerIt {
+  text-align: center;
+  margin: auto;
+  font-weight: bold;
+  width: 50%;
+  border: 6px solid red;
+  padding: 10px;
+  box-shadow: 3px 3px 8px #888888;
+}

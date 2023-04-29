@@ -4,14 +4,14 @@ import './Header.css';
 function Header() {
     return (
         <header>
-            <Link to="/mymedicines">
-                <img src="https://img.icons8.com/pastel-glyph/60/hospital--v1.png" alt="person" />
+            <Link to="/info">
+                <img src="https://i.imgur.com/jzDNGUL.png" alt="Image of a medical logo." width="70" height="70" />
             </Link>
-            <Link to="/mymedicines">
-                <h1>Improve your Health</h1>
-            </Link>
+            <Link to="/info">
+                <h1>Medicine, Exercise and Appointment Tracker</h1>
+            </Link >
             <div className="login">
-                <p>Welcome the platform</p>
+                <p>Welcome to the platform</p>
             </div>
         </header>
     )

@@ -1,37 +1,36 @@
 header {
-    color: white;
-    background: #25136b;
-    display: flex;
-    -webkit-box-shadow: 3px 3px 19px 1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 3px 3px 19px 1px rgba(0,0,0,0.75);
-    box-shadow: 3px 3px 19px 1px rgba(0,0,0,0.75);
+  color: white;
+  background: #25136b;
+  display: flex;
+  -webkit-box-shadow: 3px 3px 19px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 3px 19px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 3px 19px 1px rgba(0, 0, 0, 0.75);
 }
 
 header a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 header a img {
-    filter: invert(1);
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 header a h1 {
-    color: white;
-    margin-left: 15px;
-    font-size: 200%;
+  color: white;
+  margin-left: 15px;
+  font-size: 200%;
 }
 
 header a:hover,
 header a:active {
-    color: #3d65c2;
+  color: #3d65c2;
 }
 
 header div.login {
-    flex: 1;
-    margin-right: 0.5rem;
-    text-align: right;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+  flex: 1;
+  margin-right: 0.5rem;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }

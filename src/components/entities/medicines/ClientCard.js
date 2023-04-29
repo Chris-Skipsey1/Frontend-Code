@@ -8,14 +8,10 @@ Card.propTypes = {
 };
 
 export default function ClientCard({ client, onClick, isParentHovering = false }) {
-    // Properties ----------------------------------
-    // Hooks ---------------------------------------
-    // Context -------------------------------------
-    // Methods -------------------------------------
-    // View ----------------------------------------
+
     return (
-        <Card  className={"Card" + (isParentHovering ? " Hovering" : "") } onClick={onClick}>
-             
+        <Card className={"Card" + (isParentHovering ? " Hovering" : "")} onClick={onClick}>
+
             <div className="MedicineCard">
                 <div className="centerIt"><div><h1>{`Client ID: ${client.ClientID} `}</h1></div></div>
                 <div><br></br></div>
@@ -39,9 +35,5 @@ function Container({ children, className = "" }) {
         </div>
     );
 }
-
-// -----------------------------------------
-// Compose Card Object /////////////////////
-// -----------------------------------------
 
 Card.Container = Container;

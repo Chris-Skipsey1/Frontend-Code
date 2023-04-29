@@ -1,13 +1,17 @@
 footer {
-    height: 50px;
-    display: grid;
-    place-items: center;
-    border-top: 1px solid #25136b;
-    background: #25136b;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border-top: 1px solid #25136b;
+  background: #25136b;
 }
 
 footer a {
-    font-size: 70%;
-    text-decoration: none;
-    color: white;
+  font-size: 70%;
+  text-decoration: none;
+  color: white;
+}
+
+.yes {
+  font-size: 10%;
 }

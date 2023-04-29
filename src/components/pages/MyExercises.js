@@ -23,34 +23,29 @@ function MyExercises() {
   const exercisesEndpoint = '/exercises';
   const [exercises, , loadingMessage,] = useLoad(endpoint);
 
-  
+
 
   //const [clientFavourites, setClientFavorites] = useState([]);
-  
+
   const [isFavourite, isSetFavourite] = useState();
 
- 
+
   const handleFavourite = async (exercise) => {
     //exerciseObject.Favourite = isFavourite;
     exercise.Favourite = exercise.Favourite ? 0 : 1;
     const response = await API.put(`${exercisesEndpoint}/${exercise.ExerciseInfoID}`, exercise);
-
-
-
     console.log(exercise)
     //const endpoint1 = `${exercisesEndpoint}/${exercise.ExerciseInfoID}`
     //console.log(endpoint1)
     //console.log(JSON.stringify(exercise))
     isSetFavourite(!isFavourite);
-    }
+  }
 
   //View
   return (
     <section>
       <h2>My Exercises</h2>
       <p>Exercises that you have completed.</p>
-
-      <div><br></br></div>
       {
         !exercises
           ? <p>{loadingMessage}</p>
@@ -58,18 +53,18 @@ function MyExercises() {
             ? <p>No exercises found</p>
             : <Card.Container>
               {
-                
-                exercises.map((exercise) => 
+
+                exercises.map((exercise) =>
                   <Card key={exercise.ExerciseInfoID}>
-                    <ExerciseCard exercise={exercise} /> 
-                    <button className="secondButtonStuff" style={{background: exercise.Favourite ? "red" : "green"}} onClick={() => handleFavourite(exercise)}>
-                    {exercise.Favourite ? 'Remove exercise as completed today' : 'Mark exercise as completed today'}</button>
+                    <ExerciseCard exercise={exercise} />
+                    <center><button className="secondButtonStuff" style={{ background: exercise.Favourite ? "red" : "green" }} onClick={() => handleFavourite(exercise)}>
+                      {exercise.Favourite ? 'Mark as uncompleted' : 'Mark exercise as completed today'}</button></center>
                   </Card>
-                  )
+                )
               }
             </Card.Container>
       }
-    
+
     </section>
   );
 }
