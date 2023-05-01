@@ -2,41 +2,55 @@ import { useState } from 'react';
 import useLoad from '../../api/useLoad.js';
 import Form from '../../UI/Form.js';
 
+//Appointment placeholder----
 const emptyAppointment = {
     AppointmentDescription: "",
     AppointmentAvailabilityID: 0,
     AppointmentClientID: 50
 }
+//----------------------------
 
 export default function AppointmentForm({ onSubmit, initialAppointment = emptyAppointment }) {
     //const appointmentsEndpoint = '/appointments';
     console.log(JSON.stringify(initialAppointment));
 
-    // Initialisation ---
+    //Validate form by ID (required) and description length more than 1
     const isValid = {
         AppointmentClientID: (id) => id !== 0,
         AppointmentAvailabilityID: (id) => id !== 0,
         AppointmentDescription: (name) => name.length > 1
     }
+    //-------------------------------------------------------------
+
+    //Form error messages--------------------------------------------------------------------------
     const errorMessage = {
         AppointmentClientID: "You must select a client",
         AppointmentAvailabilityID: "You must select an availability slot",
         AppointmentDescription: "You need to write more than 2 letters to submit your appointment"
     }
-    // Conformance
+    //---------------------------------------------------------------------------------------------
+    
+    // Conformance holds these two values so that they can be updated------------------------------
     const conformance = ['AppointmentClientID', 'AppointmentAvailabilityID'];
-    // GET Personal Trainers
-    // State ---
+    //---------------------------------------------------------------------------------------------
+
+    //Passes all values and states to the Form.useForm (Form.js file)-----------------------------
     const [appointment, setAppointment, errors, handleChange2, handleSubmit] = Form.useForm(initialAppointment, conformance, { isValid, errorMessage }, onSubmit);
+    //--------------------------------------------------------------------------------------------
+
+    //useState set to 0, means initial value in the dropdown selection is a message and not a trainer name
     const [personalTrainerID, setPersonalTrainerID] = useState(0);
+    //----------------------------------------------------------------------------------------------------
 
-    // useLoad
-    // It gets the personal trainers and the trainer's availability and loads them
-    const [personalTrainers, , loadingTrainersMessage,] = useLoad('/personaltrainers');
+    //useLoad State-------------------
+    //It gets the personal trainers and the trainer's availability and loads them
+    //personalTrainers and trainerAvailability is the mapped key, and useLoad gets the entire /personal trainers and availability/personaltrainers/id endpoint
+    const [personalTrainers, , loadingTrainersMessage,] = useLoad('/personaltrainers'); //Populates personal trainer dropdown
+    
     const [id, loadTrainerAvailability] = useState(0);
-    const [trainerAvailability, , loadingAvailabilityMessage,] = useLoad(`/availability/personaltrainers/${id}`);
+    const [trainerAvailability, , loadingAvailabilityMessage,] = useLoad(`/availability/personaltrainers/${id}`); //Populates availability dropdown based on personal trainer selected
 
-    // Handlers ---
+    //Handle Change --------------------------------------------------------------------
     const handleChange1 = (event) => {
         const { name, value } = event.target;
         const newValue = (name === 'PersonalTrainerID') ? parseInt(value) : value;
@@ -44,12 +58,15 @@ export default function AppointmentForm({ onSubmit, initialAppointment = emptyAp
         setPersonalTrainerID(newValue);
         loadTrainerAvailability(newValue);
     };
+    //----------------------------------------------------------------------------------
 
+    //Pop alert telling it has been submitted. Runs when button clicked.
     function popup() {
-        alert("Your appointment has been successfully submitted! Go to the List Appointments page to edit or cancel this appointment.");
+        alert("Your appointment has been successfully submitted! Go to the My Booked Appointments page to view, edit or cancel this appointment.");
     }
+    //-----------------------------------------------------------------------------------
 
-    // View ---
+    // View of form
     return (
         <div className="FormBox">
             <center>
